@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewPager.notification_fragment_tab_all">
+<ListView
+    android:id="@+id/notification_list"
+    android:divider="@color/grey"
+    android:dividerHeight="1dp"
+    android:clipToPadding="false"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
+</FrameLayout>

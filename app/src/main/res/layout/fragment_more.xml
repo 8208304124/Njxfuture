@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark"
+    tools:context=".ui.more.more">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/mainContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="PROFILE"
+                    android:textColor="@color/grey" />
+
+                <LinearLayout
+                    android:id="@+id/editProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/light_dark"
+                    android:orientation="horizontal"
+                    android:paddingVertical="2dp">
+
+                    <ImageView
+                        android:id="@+id/persons"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/baseline_person_24"
+                        tools:ignore="MissingClass" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/user"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/message"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/edit_details"
+                            android:textColor="@color/grey" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:layout_gravity="center"
+                        android:paddingHorizontal="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:src="@drawable/baseline_arrow_forward_ios_24" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/account_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/account"
+                    android:textColor="@color/grey" />
+
+                <LinearLayout
+                    android:id="@+id/valid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/light_dark"
+                    android:orientation="horizontal"
+                    android:paddingVertical="10dp">
+
+                    <ImageView
+                        android:id="@+id/icon_view1"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="10dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/baseline_mail_24"
+                        tools:ignore="MissingClass" />
+
+                    <TextView
+                        android:id="@+id/setting_panel_name1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/valid_till_na"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:layout_gravity="center"
+                        android:paddingHorizontal="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:src="@drawable/baseline_arrow_forward_ios_24" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/subscription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@color/light_dark"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/icon_view2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_mail_24"
+                    tools:ignore="MissingClass" />
+
+                <TextView
+                    android:id="@+id/setting_panel_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/buy_subscriptions"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:src="@drawable/baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/quantsapp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@color/light_dark"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_mail_24"
+                    tools:ignore="MissingClass" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/quantsapp_web_desktop"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:src="@drawable/baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fingerPrint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@color/light_dark"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_mail_24"
+                    tools:ignore="MissingClass" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/login_with_touch_id"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:src="@drawable/baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tickets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@color/light_dark"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_mail_24"
+                    tools:ignore="MissingClass" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/my_tickets"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:src="@drawable/baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/referAndEarn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@color/light_dark"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_mail_24"
+                    tools:ignore="MissingClass" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/refer_earn"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:src="@drawable/baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/referrals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@color/light_dark"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_mail_24"
+                    tools:ignore="MissingClass" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/have_a_referral_code"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:src="@drawable/baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rewards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@color/light_dark"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_mail_24"
+                    tools:ignore="MissingClass" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/rewards_transaction_history"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:src="@drawable/baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="LINK THIRD PARTY ACCOUNTS"
+                    android:textColor="@color/grey" />
+
+                <LinearLayout
+                    android:id="@+id/broker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/light_dark"
+                    android:orientation="horizontal"
+                    android:paddingVertical="10dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="10dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/baseline_mail_24"
+                        tools:ignore="MissingClass" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Broker Accounts"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:layout_gravity="center"
+                        android:paddingHorizontal="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:src="@drawable/baseline_arrow_forward_ios_24" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/purple_500"
+                android:backgroundTint="@color/second_light_dark"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

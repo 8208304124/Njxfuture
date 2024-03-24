@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.njxfuture.ui.home.HomeFragment"
+        android:label=""
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.njxfuture.ui.dashboard.LearnFragment"
+        android:label=""
+        tools:layout="@layout/fragment_learn" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.njxfuture.ui.notifications.NotificationsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/fragment_more"
+        android:name="com.example.njxfuture.ui.more.more"
+        android:label=""
+        tools:layout="@layout/fragment_more" />
+    <fragment
+        android:id="@+id/article_activity"
+        android:name="com.example.njxfuture.ui.ArticleFragment.Articles"
+        tools:layout="@layout/fragment_articles"
+        />
+    <fragment
+        android:id="@+id/fragment_editProfile"
+        android:name="com.example.njxfuture.EditProfile"
+        tools:layout="@layout/fragment_edit_profile"
+        />
+</navigation>

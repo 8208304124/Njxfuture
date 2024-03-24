@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register"
+    android:background="@color/dark"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register">
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_marginTop="25sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            tools:ignore="UselessParent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="25sp"
+                android:text="@string/create_account"
+                android:textColor="@color/light_blue" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_profile_rounded_corners"
+                android:layout_marginTop="10sp"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/email"
+                    android:textColor="@color/light_blue" />
+
+                <!--                <Button-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:backgroundTint="@color/second_light_blue"-->
+                <!--                    android:text="@string/add_email"-->
+                <!--                    android:textColor="@color/purple_500"-->
+                <!--                    android:textSize="12sp" />-->
+                <EditText
+                    android:id="@+id/register_edit_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="Email"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/enter_mail"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/purple_500"
+                    android:textColorHint="@color/purple_500"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_profile_rounded_corners"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/full_name"
+                    android:textColor="@color/light_blue" />
+
+                <EditText
+                    android:id="@+id/register_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="User Name"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/enter_name"
+                    android:inputType="text"
+                    android:textColor="@color/purple_500"
+                    android:textColorHint="@color/purple_500"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_profile_rounded_corners"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/mobile_no"
+                        android:textColor="@color/light_blue" />
+
+                    <ImageView
+                        android:id="@+id/verify_mark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/verified"
+                        android:src="@drawable/baseline_verified_24"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/verify_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/verified"
+                        android:textColor="@color/verify_color"
+                        android:visibility="invisible" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_corner_light_blue"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="3dp"
+                        android:text="@string/_91"
+                        android:textColor="@color/purple_500"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/register_mobile_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:autofillHints="Mobile No."
+                        android:background="@android:color/transparent"
+                        android:hint="@string/enter_mobile_no"
+                        android:inputType="number"
+                        android:textColor="@color/purple_500"
+                        android:textColorHint="@color/purple_500"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/verify_button_via_sms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="@color/second_light_blue"
+                    android:text="@string/verify_via_sms"
+                    android:textColor="@color/purple_500"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_profile_rounded_corners"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/gst_no"
+                    android:textColor="@color/light_blue" />
+
+                <EditText
+                    android:id="@+id/gst_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="add_gst_no_here"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/add_gst_no_here"
+                    android:inputType="text"
+                    android:textColor="@color/purple_500"
+                    android:textColorHint="@color/purple_500"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_profile_rounded_corners"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/password"
+                    android:textColor="@color/light_blue" />
+
+                <EditText
+                    android:id="@+id/register_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="enter_password"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/enter_password"
+                    android:inputType="textPassword"
+                    android:textColor="@color/purple_500"
+                    android:textColorHint="@color/purple_500"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/register_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/second_light_blue"
+                android:text="@string/register"
+                android:textColor="@color/purple_500"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
