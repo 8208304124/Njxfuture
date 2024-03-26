@@ -25,7 +25,7 @@ public class APIRequests {
     }
     interface Articles {
         @GET("/artlst.php")
-        Call<List<ArticleDataModel>> getData(@Query("imeival") String iemi);
+        Call<List<ArticleDataModel>> getData(@Query("imeival") String iemi, @Query("lid") int lid);
     }
     // Create a Retrofit instance
     private static final Retrofit retrofit = new Retrofit.Builder()
@@ -44,7 +44,7 @@ public class APIRequests {
     public static Call<Account> creatAcc(String param1,String param2,String param3,String param4,String param5,String param6) {
         return createAccount.getData(param1,param2,param3,param4,param5,param6);
     }
-    public static Call<List<ArticleDataModel>> fetchArticles(String param1) {
-        return articlesFetch.getData(param1);
+    public static Call<List<ArticleDataModel>> fetchArticles(String param1, int param2) {
+        return articlesFetch.getData(param1, param2);
     }
 }

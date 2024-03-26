@@ -6,13 +6,14 @@
     android:orientation="horizontal"
     android:gravity="center">
     <TextView
-        android:id="@+id/learn_action_bar_title"
+        android:id="@+id/action_bar_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:text="@string/articles1" />
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="@string/events" />
 
 </LinearLayout>

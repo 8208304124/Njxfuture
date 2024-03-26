@@ -21,22 +21,47 @@ public class LearnFragment extends Fragment {
 
     private FragmentLearnBinding binding;
     LinearLayout articles;
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLearnBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         articles = binding.articles;
-        articles.setOnClickListener(View->CallArticles());
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
 
+        articles.setOnClickListener(View -> {
+            navController.navigate(R.id.article_activity);
+        });
+        binding.events.setOnClickListener(v -> {
+            navController.navigate(R.id.event_learn_activity);
+        });
+        binding.webinars.setOnClickListener(v -> {
+            navController.navigate(R.id.webinars_learn_activity);
+        });
+        binding.media.setOnClickListener(v -> {
+            navController.navigate(R.id.media_learn_activity);
+        });
+        binding.strategies.setOnClickListener(v -> {
+            navController.navigate(R.id.strategies_learn_activity);
+        });
+        binding.demoVideos.setOnClickListener(v -> {
+            navController.navigate(R.id.demo_videos_learn_activity);
+        });
+        binding.courses.setOnClickListener(v -> {
+            navController.navigate(R.id.courses_learn_activity);
+        });
+        binding.marketBrief.setOnClickListener(v -> {
+            navController.navigate(R.id.market_brief_learn_activity);
+        });
+        binding.optionClub.setOnClickListener(v -> {
+            navController.navigate(R.id.option_club_learn_activity);
+        });
+        binding.classroom.setOnClickListener(v -> {
+            navController.navigate(R.id.classroom_learn_activity);
+        });
         setCustomActionBar();
         return root;
     }
-    void CallArticles() {
-        if (getActivity() != null) {
-            NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
-            navController.navigate(R.id.article_activity);
-        }
-    }
+
     private void setCustomActionBar() {
         // Inflate the custom ActionBar layout
         View actionBarView = LayoutInflater.from(requireContext()).inflate(R.layout.learn_action_bar, null);
@@ -46,12 +71,10 @@ public class LearnFragment extends Fragment {
         assert actionBar != null;
         actionBar.setCustomView(actionBarView);
         actionBar.setDisplayShowCustomEnabled(true);
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.MATCH_PARENT,
-                Gravity.CENTER);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
         actionBar.setCustomView(actionBarView, params);
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

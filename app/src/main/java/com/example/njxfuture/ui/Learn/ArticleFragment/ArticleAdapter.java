@@ -1,6 +1,7 @@
-package com.example.njxfuture.ui.ArticleFragment;
+package com.example.njxfuture.ui.Learn.ArticleFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 
 import com.example.njxfuture.API.DataModels.ArticleData.ArticleDataModel;
 import com.example.njxfuture.R;
+import com.example.njxfuture.WebView1;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -57,6 +59,15 @@ public class ArticleAdapter extends ArrayAdapter<ArticleDataModel> {
         }
         int backgroundColor = (position % 2 == 0) ? R.color.dark : R.color.light_dark;
         view.setBackgroundResource(backgroundColor);
+        // Set onClick listener for the item
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WebView1.class);
+                intent.putExtra("url", item.getLink());
+                context.startActivity(intent);
+            }
+        });
         return view;
 
     }

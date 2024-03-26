@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_dark"
-    tools:context=".ui.ArticleFragment.Articles">
+    tools:context=".ui.Learn.ArticleFragment.Articles">
 <ListView
     android:id="@+id/article_list"
     android:visibility="visible"
