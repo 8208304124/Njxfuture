@@ -1,6 +1,7 @@
 package com.example.njxfuture.ui.ArticleFragment;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,45 +18,46 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ArticleAdapter extends ArrayAdapter<String> {
+public class ArticleAdapter extends ArrayAdapter<ArticleDataModel> {
 
     private final Context context;
     private final List<ArticleDataModel> items;
 
     public ArticleAdapter(Context context, List<ArticleDataModel> items) {
-        super(context, R.layout.fragment_articles, items.size());
+        super(context, R.layout.fragment_articles, items);
         this.context = context;
         this.items = items;
     }
-
+    // Method to update the data
+    public void updateData(List<ArticleDataModel> newArticles) {
+        items.clear();
+        items.addAll(newArticles);
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        ViewHolder viewHolder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.articles_row, parent, false);
-            viewHolder = new ViewHolder();
-            viewHolder.textView = convertView.findViewById(R.id.head_name);
-            viewHolder.imageView = convertView.findViewById(R.id.icon_view);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+        View view = convertView;
+        if (view == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            if (inflater != null) {
+                view = inflater.inflate(R.layout.articles_row, parent, false);
+            }
         }
 
         ArticleDataModel item = items.get(position);
-        if (item != null) {
-            viewHolder.textView.setText(item.getTitle());
-            String imageUrl = "http://njx.revacg.in/ATIJxzwGS.jpeg"; // Assuming this is the URL for each article's image
-            Picasso.get().load(imageUrl).into(viewHolder.imageView);
+        if (view != null) {
+            TextView textView = view.findViewById(R.id.head_name);
+            TextView textView1 = view.findViewById(R.id.desc);
+            String imageUrl = "http://njx.revacg.in/"+item.getImg(); // Assuming this is the URL for each article's image
+            ImageView image = view.findViewById(R.id.icon_view);
+            textView.setText(item.getTitle());
+            textView1.setText(item.getArt());
+            Picasso.get().load(imageUrl).into(image);
         }
-
         int backgroundColor = (position % 2 == 0) ? R.color.dark : R.color.light_dark;
-        convertView.setBackgroundResource(backgroundColor);
+        view.setBackgroundResource(backgroundColor);
+        return view;
 
-        return convertView;
-    }
-    static class ViewHolder {
-        TextView textView;
-        ImageView imageView;
     }
 }

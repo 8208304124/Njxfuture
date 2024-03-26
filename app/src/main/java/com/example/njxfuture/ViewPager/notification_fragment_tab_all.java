@@ -44,14 +44,11 @@ public class notification_fragment_tab_all extends Fragment {
         listView = binding.notificationList;
         NotificationAdapter notify = new NotificationAdapter(getContext(), arrname);
         listView.setAdapter(notify);
-        Log.d("YourFragment", "onCreateView");
         return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        Log.d("YourFragment", "onViewCreated");
-        // Your existing code here
     }
 
     @Override

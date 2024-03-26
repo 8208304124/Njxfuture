@@ -26,11 +26,9 @@ public class WebView1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
-        Log.d("YourFragment", "running");
 
         try {
             String url = getIntent().getStringExtra("url");
-            Log.d("YourFragment", url);
 
             webView = findViewById(R.id.webView);
 

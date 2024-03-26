@@ -41,7 +41,6 @@ public class SettingAdatper extends ArrayAdapter<String> {
             }
         }
 
-        Log.d("my frag", "asadsads");
         if (view != null) {
             TextView textView = view.findViewById(R.id.setting_panel_name);
 //            ImageView icon = view.findViewById(R.id.icon_view);

@@ -43,6 +43,7 @@ import com.example.njxfuture.databinding.FragmentMoreBinding;
 import com.example.njxfuture.ui.Adapters.NotificationAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class Articles extends Fragment {
     private ProgressBar progressBar;
     private static final int LOADER_DURATION_MS = 2000;
     private final int selectedNavItem = R.id.navigation_dashboard;
-    private List<ArticleDataModel> items;
+    private List<ArticleDataModel> items = new ArrayList<>();
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +67,8 @@ public class Articles extends Fragment {
         View root = binding.getRoot();
         listView = binding.articleList;
         progressBar = root.findViewById(R.id.progressBar);
+       ArticleAdapter adapter = new ArticleAdapter(getContext(), new ArrayList<>()); // Initialize the adapter
+        listView.setAdapter(adapter);
         showLoader();
         Call<List<ArticleDataModel>> call = APIRequests.fetchArticles("860114061759922");
         call.enqueue(new Callback<List<ArticleDataModel>>() {
@@ -74,16 +77,8 @@ public class Articles extends Fragment {
                 if (response.isSuccessful()) {
                     if(response.body()!=null)
                         {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    hideLoader();
-                                    items = response.body();
-                                    ArticleAdapter adapt = new ArticleAdapter(getContext(), items);
-                                    listView.setAdapter(adapt);
-                                }
-                            }, LOADER_DURATION_MS);
-
+                            hideLoader();
+                            adapter.updateData(response.body());
                         }
                 }
             }
