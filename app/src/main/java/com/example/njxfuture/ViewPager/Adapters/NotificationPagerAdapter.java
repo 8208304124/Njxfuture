@@ -20,11 +20,11 @@ public class NotificationPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new notification_fragment_tab_all();
             case 1:
-                return new com.example.njxfuture.ViewPager.Adapters.notification_fragment_tab_advisory();
+                return new com.example.njxfuture.ViewPager.notification_fragment_tab_advisory();
             case 2:
-                return new com.example.njxfuture.ViewPager.Adapters.notification_fragment_tab_general();
+                return new com.example.njxfuture.ViewPager.notification_fragment_tab_general();
             case 3:
-                return new com.example.njxfuture.ViewPager.Adapters.notification_fragment_tab_mtm_alerts();
+                return new com.example.njxfuture.ViewPager.notification_fragment_tab_mtm_alerts();
             default:
                 return null;
         }

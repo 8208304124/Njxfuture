@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.njxfuture.API.APIRequests;
+import com.example.njxfuture.API.DataModels.NotificationDataModel;
 import com.example.njxfuture.R;
 import com.example.njxfuture.databinding.FragmentNotificationTabAllBinding;
 import com.example.njxfuture.databinding.FragmentNotificationsBinding;
@@ -22,14 +24,13 @@ import com.example.njxfuture.ui.Adapters.NotificationAdapter;
 import java.util.Arrays;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class notification_fragment_tab_all extends Fragment {
-    List<String> arrname = Arrays.asList(new String[]{"Alis", "Naina", "Bob", "Julia", "Marry", "Tony Stark", "Chris", "Tom Holland", "Thor", "Elivis", "Leon", "Captain America",
-            "Dr Strange", "Ant Man", "Charles", "Hulk"});
-
-    List<String> arrmessage = Arrays.asList(new String[]{"Hi", "Hello", "How are You", "Hello,How are You", "I am fine", "hi,what about you", "your name is thor", "No ",
-            "is you are a studen ", "yes i am ", "ok ", "Good night", "Good Morning", "Good AfterNoon", "hello, Sir", "Hi,Maam"});
-    private @NonNull FragmentNotificationTabAllBinding binding;
+  private @NonNull FragmentNotificationTabAllBinding binding;
 
 
     ListView listView;
@@ -42,8 +43,25 @@ public class notification_fragment_tab_all extends Fragment {
         binding = FragmentNotificationTabAllBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         listView = binding.notificationList;
-        NotificationAdapter notify = new NotificationAdapter(getContext(), arrname);
-        listView.setAdapter(notify);
+        Call<List<NotificationDataModel>> call = APIRequests.fetchNotifications("860114061759922");
+        call.enqueue(new Callback<List<NotificationDataModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<NotificationDataModel>> call, @NonNull Response<List<NotificationDataModel>> response) {
+                if (response.isSuccessful()) {
+                    if(response.body()!=null)
+                    {
+                        NotificationAdapter notify = new NotificationAdapter(getContext(), response.body());
+                        listView.setAdapter(notify);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<NotificationDataModel>> call, @NonNull Throwable t) {
+                Log.e("API_CALL", "API call failed: " + t.getMessage());
+            }
+        });
+
         return root;
     }
 
@@ -54,7 +72,7 @@ public class notification_fragment_tab_all extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        NotificationAdapter notify = new NotificationAdapter(getContext(), arrname);
-        listView.setAdapter(notify);
+//        NotificationAdapter notify = new NotificationAdapter(getContext(), arrname);
+//        listView.setAdapter(notify);
     }
 }

@@ -1,7 +1,8 @@
 package com.example.njxfuture.API;
 import com.example.njxfuture.API.DataModels.Account;
-import com.example.njxfuture.API.DataModels.ArticleData.ArticleData;
 import com.example.njxfuture.API.DataModels.ArticleData.ArticleDataModel;
+import com.example.njxfuture.API.DataModels.NotificationDataModel;
+import com.example.njxfuture.API.DataModels.PackageDataModel.PackageDetailsDataModel;
 import com.example.njxfuture.API.DataModels.UserModel;
 
 import java.util.List;
@@ -27,6 +28,14 @@ public class APIRequests {
         @GET("/artlst.php")
         Call<List<ArticleDataModel>> getData(@Query("imeival") String iemi, @Query("lid") int lid);
     }
+    interface Notifications {
+        @GET("/notlst.php")
+        Call<List<NotificationDataModel>> getData(@Query("imeival") String iemi);
+    }
+    interface PackageDetails {
+        @GET("/pckdet.php")
+        Call<PackageDetailsDataModel> getData(@Query("imeival") String iemi, @Query("pckid") String pckid, @Query("dt") String dt);
+    }
     // Create a Retrofit instance
     private static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -37,6 +46,9 @@ public class APIRequests {
     private static final MyApiService apiService = retrofit.create(MyApiService.class);
     private static final CreateAccount createAccount = retrofit.create(CreateAccount.class);
     private static final Articles articlesFetch = retrofit.create(Articles.class);
+    private static final Notifications notificationFetch = retrofit.create(Notifications.class);
+    private static final PackageDetails packageFetch = retrofit.create(PackageDetails.class);
+
     // Define a method to make API requests
     public static Call<UserModel> fetchData(String param1) {
         return apiService.getData(param1);
@@ -46,5 +58,11 @@ public class APIRequests {
     }
     public static Call<List<ArticleDataModel>> fetchArticles(String param1, int param2) {
         return articlesFetch.getData(param1, param2);
+    }
+    public static Call<List<NotificationDataModel>> fetchNotifications(String param1) {
+        return notificationFetch.getData(param1);
+    }
+    public static Call<PackageDetailsDataModel> fetchPackages(String param1,String param2,String param3) {
+        return packageFetch.getData(param1,param2,param3);
     }
 }

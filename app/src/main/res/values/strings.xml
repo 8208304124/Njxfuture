@@ -77,4 +77,7 @@
     <string name="market_brief1">MARKET BRIEF</string>
     <string name="option_club1">OPTION CLUB</string>
     <string name="classroom1">CLASSROOM</string>
+    <string name="image">Image</string>
+    <string name="actions">Actions</string>
+    <string name="steps">Steps</string>
 </resources>

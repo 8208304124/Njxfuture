@@ -72,4 +72,8 @@
         android:id="@+id/fragment_editProfile"
         android:name="com.example.njxfuture.EditProfile"
         tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/package_details"
+        android:name="com.example.njxfuture.ui.PackageDetails.PackageDetails"
+        tools:layout="@layout/fragment_package_details" />
 </navigation>
