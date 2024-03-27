@@ -28,13 +28,18 @@
                 android:text="@string/email"
                 android:textColor="@color/light_blue" />
 
-            <Button
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/user_email"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/second_light_blue"
-                android:text="@string/add_email"
+                android:autofillHints="User Name"
+                android:background="@android:color/transparent"
+                android:hint="@string/enter_mail"
+                android:textColorHint="@color/purple_500"
                 android:textColor="@color/purple_500"
-                android:textSize="12sp" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:inputType="textEmailAddress" />
 
         </LinearLayout>
 
@@ -58,10 +63,12 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="User Name"
                 android:background="@android:color/transparent"
-                android:text="@string/user"
+                android:hint="@string/user"
+                android:textColorHint="@color/purple_500"
                 android:textColor="@color/purple_500"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout
@@ -99,12 +106,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:hint="@string/enter_mobile_no"
+                    android:textColorHint="@color/purple_500"
                     android:autofillHints="User Name"
                     android:background="@android:color/transparent"
                     android:text="7774071053"
                     android:textColor="@color/purple_500"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:inputType="number" />
 
             </LinearLayout>
 
@@ -133,13 +143,17 @@
                 android:textColor="@color/light_blue" />
 
             <EditText
+                android:id="@+id/edit_gst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Enter GST no."
+                android:hint="@string/enter_gst_no"
+                android:textColorHint="@color/purple_500"
                 android:background="@android:color/transparent"
                 android:textColor="@color/purple_500"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:inputType="text" />
 
         </LinearLayout>
 
@@ -158,17 +172,30 @@
                 android:textColor="@color/light_blue" />
 
             <EditText
+                android:id="@+id/change_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Enter Password"
                 android:background="@android:color/transparent"
                 android:textColor="@color/purple_500"
+                android:hint="@string/enter_password"
                 android:textSize="16sp"
                 android:text="asdasdd"
+                android:drawableEnd="@drawable/eye_outline_svgrepo_com"
+                android:drawablePadding="8dp"
                 android:inputType="textPassword"
                 android:textStyle="bold" />
 
         </LinearLayout>
+        <Button
+            android:id="@+id/update_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/second_light_blue"
+            android:text="@string/update_profile"
+            android:textColor="@color/purple_500"
+            android:textSize="12sp" />
 
     </LinearLayout>
 </ScrollView>

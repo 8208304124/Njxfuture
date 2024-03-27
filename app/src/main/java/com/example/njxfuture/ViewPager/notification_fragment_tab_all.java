@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -34,6 +35,7 @@ public class notification_fragment_tab_all extends Fragment {
 
 
     ListView listView;
+    private ProgressBar progressBar;
 
     @Override
     @SuppressLint("ResourceType")
@@ -42,7 +44,9 @@ public class notification_fragment_tab_all extends Fragment {
         super.onCreate(savedInstanceState);
         binding = FragmentNotificationTabAllBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        progressBar = root.findViewById(R.id.progressBar);
         listView = binding.notificationList;
+        showLoader();
         Call<List<NotificationDataModel>> call = APIRequests.fetchNotifications("860114061759922");
         call.enqueue(new Callback<List<NotificationDataModel>>() {
             @Override
@@ -50,6 +54,7 @@ public class notification_fragment_tab_all extends Fragment {
                 if (response.isSuccessful()) {
                     if(response.body()!=null)
                     {
+                        hideLoader();
                         NotificationAdapter notify = new NotificationAdapter(getContext(), response.body());
                         listView.setAdapter(notify);
                     }
@@ -68,5 +73,15 @@ public class notification_fragment_tab_all extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     }
+    private void showLoader() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+    }
 
+    private void hideLoader() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
 }

@@ -2,17 +2,17 @@ package com.example.njxfuture.ui.PackageDetails;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
-import com.example.njxfuture.API.DataModels.PackageDataModel.Point;
+import android.widget.ProgressBar;
 import com.example.njxfuture.API.DataModels.PackageDataModel.Step;
 import com.example.njxfuture.R;
-import com.example.njxfuture.databinding.FragmentPackageActionsDetailsBinding;
 import com.example.njxfuture.databinding.FragmentPackageStepsDetailsBinding;
 
 import java.util.List;
@@ -23,6 +23,7 @@ public class PackageStepsDetails extends Fragment {
     List<Step> steps;
     ListView listView;
     private FragmentPackageStepsDetailsBinding binding;
+    private ProgressBar progressBar;
     public PackageStepsDetails(List<Step> steps) {
         this.steps = steps;
     }
@@ -31,16 +32,34 @@ public class PackageStepsDetails extends Fragment {
         // Required empty public constructor
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentPackageStepsDetailsBinding.inflate(inflater, container, false);
-
+        View root = binding.getRoot();
+        progressBar = root.findViewById(R.id.progressBar);
         listView = binding.stepsList;
-        if(steps!=null)
-        {
-            PackageStepsDetailsAdapter adapter = new PackageStepsDetailsAdapter(getContext(), steps);
-            listView.setAdapter(adapter);
+        showLoader();
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            if(steps!=null)
+            {
+                hideLoader();
+                PackageStepsDetailsAdapter adapter = new PackageStepsDetailsAdapter(getContext(), steps);
+                listView.setAdapter(adapter);
+            }
+        }, 2000);
+
+        return root;
+    }
+    private void showLoader() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
         }
-        return binding.getRoot();
+    }
+
+    private void hideLoader() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }

@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     android:background="@color/light_dark"
     tools:context=".ui.Learn.ArticleFragment.Articles">
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        />
 <ListView
     android:id="@+id/article_list"
     android:visibility="visible"

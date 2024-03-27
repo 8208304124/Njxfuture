@@ -426,7 +426,8 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
-                        android:src="@drawable/baseline_arrow_forward_ios_24" />
+                        android:src="@drawable/baseline_arrow_forward_ios_24"
+                        android:contentDescription="@string/arrow_forward" />
                 </LinearLayout>
             </LinearLayout>
 

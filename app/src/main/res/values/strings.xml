@@ -71,7 +71,7 @@
     <string name="events1">EVENTS</string>
     <string name="webinars1">WEBINARS</string>
     <string name="media1">MEDIA</string>
-    <string name="strategies1">Strategies</string>
+    <string name="strategies1">STRATEGIES</string>
     <string name="demo_videos1">DEMO VIDEOS</string>
     <string name="courses1">COURSES</string>
     <string name="market_brief1">MARKET BRIEF</string>
@@ -81,4 +81,7 @@
     <string name="actions">Actions</string>
     <string name="steps">Steps</string>
     <string name="this_is_simple_demo_text">This is Simple Demo text</string>
+    <string name="arrow_forward">Arrow Forward</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="enter_gst_no">Enter GST no.</string>
 </resources>

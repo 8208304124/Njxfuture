@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.njxfuture.API.APIRequests;
 import com.example.njxfuture.API.DataModels.ArticleData.ArticleDataModel;
@@ -33,18 +34,25 @@ public class Articles extends Fragment {
     ListView listView;
     private FragmentArticlesBinding binding;
     private ProgressBar progressBar;
+    int id;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         binding = FragmentArticlesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        listView = binding.articleList;
         progressBar = root.findViewById(R.id.progressBar);
-       ArticleAdapter adapter = new ArticleAdapter(getContext(), new ArrayList<>()); // Initialize the adapter
-        listView.setAdapter(adapter);
         showLoader();
-        Call<List<ArticleDataModel>> call = APIRequests.fetchArticles("860114061759922",1);
+        listView = binding.articleList;
+        Bundle args = getArguments();
+
+        if (args != null) {
+            id = args.getInt("pckid");
+        }else id=4;
+
+        ArticleAdapter adapter = new ArticleAdapter(getContext(), new ArrayList<>()); // Initialize the adapter
+        listView.setAdapter(adapter);
+        Call<List<ArticleDataModel>> call = APIRequests.fetchArticles("860114061759922",id);
         call.enqueue(new Callback<List<ArticleDataModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<ArticleDataModel>> call, @NonNull Response<List<ArticleDataModel>> response) {
@@ -64,17 +72,49 @@ public class Articles extends Fragment {
         });
 
         setHasOptionsMenu(true);
-        setCustomActionBar();
+        if(id==1)
+        {
+            setCustomActionBar(getResources().getString(R.string.events1));
+        }
+        else if(id==2){
+            setCustomActionBar(getResources().getString(R.string.webinars1));
+        }
+        else if(id==3){
+            setCustomActionBar(getResources().getString(R.string.media1));
+        }
+        else if(id==4){
+            setCustomActionBar(getResources().getString(R.string.articles1));
+        }
+        else if(id==5){
+            setCustomActionBar(getResources().getString(R.string.strategies));
+        }
+        else if(id==6){
+            setCustomActionBar(getResources().getString(R.string.demo_videos1));
+        }
+        else if(id==7){
+            setCustomActionBar(getResources().getString(R.string.courses1));
+        }
+        else if(id==8){
+            setCustomActionBar(getResources().getString(R.string.market_brief1));
+        }
+        else if(id==9){
+            setCustomActionBar(getResources().getString(R.string.option_club1));
+        }
+        else if(id==10){
+            setCustomActionBar(getResources().getString(R.string.classroom1));
+        }
         return root;
     }
 
-    public void setCustomActionBar() {
+    public void setCustomActionBar(String title) {
         // Inflate the custom ActionBar layout
         View actionBarView = LayoutInflater.from(requireContext()).inflate(R.layout.article_action_bar, null);
 
         // Set custom ActionBar layout as ActionBar
         ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         actionBar.setCustomView(actionBarView);
+        TextView text= actionBarView.findViewById(R.id.learn_action_bar_title);
+        text.setText(title);
         actionBar.setDisplayShowCustomEnabled(true);
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(
                 ActionBar.LayoutParams.WRAP_CONTENT,

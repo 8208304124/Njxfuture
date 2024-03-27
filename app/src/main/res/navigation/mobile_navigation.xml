@@ -33,42 +33,6 @@
         android:name="com.example.njxfuture.ui.Learn.ArticleFragment.Articles"
         tools:layout="@layout/fragment_articles" />
     <fragment
-        android:id="@+id/event_learn_activity"
-        android:name="com.example.njxfuture.ui.Learn.Events"
-        tools:layout="@layout/fragment_events" />
-    <fragment
-        android:id="@+id/webinars_learn_activity"
-        android:name="com.example.njxfuture.ui.Learn.Webinars"
-        tools:layout="@layout/fragment_events" />
-    <fragment
-        android:id="@+id/media_learn_activity"
-        android:name="com.example.njxfuture.ui.Learn.Media"
-        tools:layout="@layout/fragment_events" />
-    <fragment
-        android:id="@+id/strategies_learn_activity"
-        android:name="com.example.njxfuture.ui.Learn.Strategies"
-        tools:layout="@layout/fragment_events" />
-    <fragment
-        android:id="@+id/demo_videos_learn_activity"
-        android:name="com.example.njxfuture.ui.Learn.DemoVideos"
-        tools:layout="@layout/fragment_events" />
-    <fragment
-        android:id="@+id/courses_learn_activity"
-        android:name="com.example.njxfuture.ui.Learn.Courses"
-        tools:layout="@layout/fragment_events" />
-    <fragment
-        android:id="@+id/market_brief_learn_activity"
-        android:name="com.example.njxfuture.ui.Learn.MarketBrief"
-        tools:layout="@layout/fragment_events" />
-    <fragment
-        android:id="@+id/option_club_learn_activity"
-        android:name="com.example.njxfuture.ui.Learn.OptionClub"
-        tools:layout="@layout/fragment_events" />
-    <fragment
-        android:id="@+id/classroom_learn_activity"
-        android:name="com.example.njxfuture.ui.Learn.ClassRoom"
-        tools:layout="@layout/fragment_events" />
-    <fragment
         android:id="@+id/fragment_editProfile"
         android:name="com.example.njxfuture.EditProfile"
         tools:layout="@layout/fragment_edit_profile" />
