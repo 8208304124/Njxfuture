@@ -9,33 +9,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.njxfuture.API.DataModels.MTMDataModel;
-import com.example.njxfuture.API.MoneyControlsAPI;
-import com.example.njxfuture.R;
-import com.example.njxfuture.ViewPager.MTM_alerts.MTMAdapter;
-import com.example.njxfuture.databinding.FragmentNotificationTabAllBinding;
 import com.example.njxfuture.databinding.FragmentNotificationTabMtmAlertsBinding;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
-import retrofit2.http.GET;
 
 public class notification_fragment_tab_mtm_alerts extends Fragment {
     private @NonNull FragmentNotificationTabMtmAlertsBinding binding;
-    public interface RSSService {
-        @GET("MCtopnews.xml")
-        Call<RSSFeed> getTopNews();
-    }
+
     private RecyclerView recyclerView;
-    private MTMAdapter adapter;
-    private List<RSSItem> rssItems = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

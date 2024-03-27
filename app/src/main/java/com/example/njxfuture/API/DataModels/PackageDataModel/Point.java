@@ -1,12 +1,12 @@
 package com.example.njxfuture.API.DataModels.PackageDataModel;
 
 public class Point {
-    private String point;
+    private String info;
 
-    public void setPoint(String point){
-        this.point = point;
+    public void setInfo(String point){
+        this.info = info;
     }
-    public String getPoint(){
-        return point;
+    public String getInfo(){
+        return info;
     }
 }

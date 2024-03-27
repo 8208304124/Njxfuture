@@ -80,4 +80,5 @@
     <string name="image">Image</string>
     <string name="actions">Actions</string>
     <string name="steps">Steps</string>
+    <string name="this_is_simple_demo_text">This is Simple Demo text</string>
 </resources>

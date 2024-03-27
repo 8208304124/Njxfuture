@@ -69,10 +69,4 @@ public class notification_fragment_tab_all extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-//        NotificationAdapter notify = new NotificationAdapter(getContext(), arrname);
-//        listView.setAdapter(notify);
-    }
 }

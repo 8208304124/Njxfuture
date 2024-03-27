@@ -1,9 +1,11 @@
 package com.example.njxfuture.ui.Adapters;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -19,6 +21,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.njxfuture.API.DataModels.NotificationDataModel;
 import com.example.njxfuture.R;
@@ -69,6 +73,12 @@ public class NotificationAdapter extends ArrayAdapter<NotificationDataModel> {
             TextView dates = view.findViewById(R.id.date);
             dates.setText(formatDateTime(items.get(position).getPdt()));
         }
+        view.setOnClickListener(v->{
+            Bundle bundle = new Bundle();
+            bundle.putString("pckid", items.get(position).getpckid());
+            NavController navController = Navigation.findNavController((Activity) context, R.id.nav_host_fragment_activity_main);
+            navController.navigate(R.id.package_details,bundle);
+        });
         return view;
     }
 

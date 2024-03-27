@@ -20,14 +20,19 @@ public class PackageImageDetails extends Fragment {
     public PackageImageDetails(String img) {
         this.img = img;
     }
-
+    public PackageImageDetails() {
+        // Required empty public constructor
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentPackageImageDetailsBinding.inflate(inflater, container, false);
         ImageView packImage = binding.packImage;
-        String imageUrl = "http://njx.revacg.in/"+img;
-        Picasso.get().load(imageUrl).into(packImage);
+        if(img!=null)
+        {
+            String imageUrl = "http://njx.revacg.in/" + img;
+            Picasso.get().load(imageUrl).into(packImage);
+        }
         return binding.getRoot();
     }
 }
