@@ -114,7 +114,7 @@ public class EditProfile extends Fragment {
         });
         binding.updateBtn.setOnClickListener(v->{
             if(!uname.isEmpty() && !umail.isEmpty() && !upwd.isEmpty() && !ugst.isEmpty() && !uno.isEmpty()){
-                
+
             }
         });
         setCustomActionBar();
