@@ -35,7 +35,7 @@ public class Register extends AppCompatActivity {
 
 
     EditText email, uname, mno, gst, pwd, otp;
-    String mail ="", userName="", mobile="", GST="", pass="";
+    String mail = "", userName = "", mobile = "", GST = "", pass = "";
     TextView verify_text, number_text;
     private static final String PREF_KEY_DEVICE_ID = "device_id";
     Button register, verify;
@@ -63,10 +63,10 @@ public class Register extends AppCompatActivity {
         verify_mark = findViewById(R.id.verify_mark);
 
         verify.setOnClickListener(v -> {
-            if(count == 1){
+            if (count == 1) {
                 if (isValidMobileNumber(mno.getText().toString())) {
 
-                    Call<OtpGenerateDataModel> call = APIRequests.generateOtp(getDeviceIds(getApplicationContext()));
+                    Call<OtpGenerateDataModel> call = APIRequests.generateOtp(getDeviceIds(getApplicationContext()), mno.getText().toString());
                     call.enqueue(new Callback<OtpGenerateDataModel>() {
                         @Override
                         public void onResponse(@NonNull Call<OtpGenerateDataModel> call, @NonNull Response<OtpGenerateDataModel> response) {
@@ -77,8 +77,7 @@ public class Register extends AppCompatActivity {
                                     mno.setVisibility(View.GONE);
                                     number_text.setVisibility(View.GONE);
                                     otp.setVisibility(View.VISIBLE);
-                                }
-                                else{
+                                } else {
                                     Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -90,14 +89,12 @@ public class Register extends AppCompatActivity {
                         }
                     });
 
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Mobile Number is incorrect!!", Toast.LENGTH_SHORT).show();
                 }
-            }
-            else if(count>2) {
+            } else if (count > 2) {
                 if (isValidMobileNumber(mno.getText().toString())) {
-                    Call<UpdateUserDataModel> call = APIRequests.getOtpVerify(getDeviceIds(getApplicationContext()), otp.getText().toString());
+                    Call<UpdateUserDataModel> call = APIRequests.getOtpVerify(getDeviceIds(getApplicationContext()), otp.getText().toString(), mno.getText().toString());
                     call.enqueue(new Callback<UpdateUserDataModel>() {
                         @Override
                         public void onResponse(@NonNull Call<UpdateUserDataModel> call, @NonNull Response<UpdateUserDataModel> response) {
@@ -113,8 +110,7 @@ public class Register extends AppCompatActivity {
                                     mno.setFocusable(false);
                                     mno.setClickable(false);
                                     mno.setEnabled(false);
-                                }
-                                else{
+                                } else {
                                     Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -226,14 +222,12 @@ public class Register extends AppCompatActivity {
                     public void onResponse(@NonNull Call<Account> call, @NonNull Response<Account> response) {
                         if (response.isSuccessful()) {
                             assert response.body() != null;
-                            if(response.body().getRes())
-                            {
+                            if (response.body().getRes()) {
                                 Toast.makeText(getApplicationContext(), "Account Created Successfully!!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(Register.this, MainActivity.class);
                                 finishAffinity();
                                 startActivity(intent);
-                            }
-                            else {
+                            } else {
                                 Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -244,8 +238,7 @@ public class Register extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
-            else {
+            } else {
                 Toast.makeText(getApplicationContext(), "All Fields are necessary!!", Toast.LENGTH_SHORT).show();
             }
         });

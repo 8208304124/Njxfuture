@@ -27,19 +27,22 @@ public class APIRequests {
 
     interface GenerateOtp {
         @GET("/genotp.php")
-        Call<OtpGenerateDataModel> getData(@Query("imeival") String param1);
+        Call<OtpGenerateDataModel> getData(@Query("imeival") String param1, @Query("mno") String param2);
     }
+
     interface Login {
         @GET("/logusr.php")
         Call<UpdateUserDataModel> getData(@Query("imeival") String iemi,
                                           @Query("phno") String mno,
                                           @Query("pwd") String pwd);
     }
+
     interface OtpVerify {
         @GET("/otpveri.php")
         Call<UpdateUserDataModel> getData(@Query("imeival") String iemi,
-                                          @Query("otp") String otp);
+                                          @Query("otp") String otp, @Query("mno") String mno);
     }
+
     interface CreateAccount {
         @GET("/regusr.php")
         Call<Account> getData(@Query("imeival") String iemi,
@@ -98,13 +101,16 @@ public class APIRequests {
     private static final Login getLogin = retrofit.create(Login.class);
     private static final OtpVerify otpVerify = retrofit.create(OtpVerify.class);
     private static final GenerateOtp getOtpVerify = retrofit.create(GenerateOtp.class);
+
     // Define a method to make API requests
     public static Call<UserModel> fetchData(String param1) {
         return apiService.getData(param1);
     }
-    public static Call<UpdateUserDataModel> getOtpVerify(String param1,String otp) {
-        return otpVerify.getData(param1,otp);
+
+    public static Call<UpdateUserDataModel> getOtpVerify(String param1, String otp, String mno) {
+        return otpVerify.getData(param1, otp, mno);
     }
+
     public static Call<UpdateUserDataModel> getUserLogin(String param1, String mno, String pwd) {
         return getLogin.getData(param1, mno, pwd);
     }
@@ -132,7 +138,8 @@ public class APIRequests {
     public static Call<UpdateUserDataModel> updateUserDetails(String param1, String param2, String param3, String param4, String param5, String param6) {
         return updateUser.getData(param1, param2, param3, param4, param5, param6);
     }
-    public static Call<OtpGenerateDataModel> generateOtp(String param1) {
-        return getOtpVerify.getData(param1);
+
+    public static Call<OtpGenerateDataModel> generateOtp(String param1, String param2) {
+        return getOtpVerify.getData(param1, param2);
     }
 }
