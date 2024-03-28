@@ -2,6 +2,7 @@ package com.example.njxfuture.ui.PackageDetails;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.example.njxfuture.ui.Adapters.PackageDetailsAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +41,7 @@ public class PackageDetails extends Fragment {
     private FragmentPackageDetailsBinding binding;
     TabLayout tabLayout;
     ViewPager viewPager;
+    String id="";
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,12 +52,12 @@ public class PackageDetails extends Fragment {
         viewPager = binding.packageViewpager;
         assert fragmentManager != null;
         Bundle args = getArguments();
-        String id="";
+
         if (args != null) {
              id = args.getString("pckid");
         }else id="1";
 
-        Call<PackageDetailsDataModel> call = APIRequests.fetchPackages("123456789",id,"18-03-2024");
+        Call<PackageDetailsDataModel> call = APIRequests.fetchPackages(getDeviceIds(getContext()),id,"18-03-2024");
         call.enqueue(new Callback<PackageDetailsDataModel>() {
             @Override
             public void onResponse(@NonNull Call<PackageDetailsDataModel> call, @NonNull Response<PackageDetailsDataModel> response) {
@@ -98,7 +101,7 @@ public class PackageDetails extends Fragment {
             FragmentManager fragmentManager = getFragmentManager();
             viewPager = binding.packageViewpager;
             assert fragmentManager != null;
-            Call<PackageDetailsDataModel> call = APIRequests.fetchPackages("123456789","1","18-03-2024");
+            Call<PackageDetailsDataModel> call = APIRequests.fetchPackages(getDeviceIds(getContext()),id,"18-03-2024");
             call.enqueue(new Callback<PackageDetailsDataModel>() {
                 @Override
                 public void onResponse(@NonNull Call<PackageDetailsDataModel> call, @NonNull Response<PackageDetailsDataModel> response) {
@@ -140,5 +143,14 @@ public class PackageDetails extends Fragment {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public String getDeviceIds(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String deviceId = sharedPreferences.getString("device_id", null);
+        if (deviceId == null) {
+            deviceId = UUID.randomUUID().toString();
+            sharedPreferences.edit().putString("device_id", deviceId).apply();
+        }
+        return deviceId;
     }
 }

@@ -16,4 +16,6 @@
     <color name="second_light_blue">#4b5c70</color>
     <color name="light_dark">#182e46</color>
     <color name="second_light_dark">#2e4058</color>
+    <color name="eyeIconVisibleColor">#FF0000</color>
+    <color name="eyeIconHiddenColor">#00FF00</color>
 </resources>

@@ -84,4 +84,6 @@
     <string name="arrow_forward">Arrow Forward</string>
     <string name="update_profile">Update Profile</string>
     <string name="enter_gst_no">Enter GST no.</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="verify">Verify</string>
 </resources>

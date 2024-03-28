@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.LauncherActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.njxfuture.R;
+import com.example.njxfuture.WebView1;
 import com.example.njxfuture.databinding.FragmentMoreBinding;
 import com.example.njxfuture.ui.Adapters.NotificationAdapter;
 import com.example.njxfuture.ui.Adapters.SettingAdatper;
@@ -37,7 +39,7 @@ import java.util.List;
 
 public class more extends Fragment {
 
-    LinearLayout editProfile;
+    LinearLayout editProfile, subscription, referandearn;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -47,8 +49,23 @@ public class more extends Fragment {
         com.example.njxfuture.databinding.FragmentMoreBinding binding = FragmentMoreBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         editProfile = binding.editProfile;
+        subscription = binding.subscription;
+        referandearn = binding.referAndEarn;
         editProfile.setOnClickListener(View ->{
             CallEditProfile();
+        });
+        subscription.setOnClickListener(v->{
+            Intent intent = new Intent(getContext(), WebView1.class);
+            intent.putExtra("url", "http://njx.revacg.in/");
+            startActivity(intent);
+        });
+        referandearn.setOnClickListener(v->{
+            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            String shareBody = "Here is the share content";
+            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here");
+            sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share via"));
         });
         setCustomActionBar();
         return root;

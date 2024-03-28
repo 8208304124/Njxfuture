@@ -1,12 +1,9 @@
 package com.example.njxfuture;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -27,15 +24,26 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import com.example.njxfuture.API.DataModels.Account;
+import com.example.njxfuture.API.DataModels.OtpGenerateDataModel;
+import com.example.njxfuture.API.DataModels.UpdateUserDataModel;
+
+import java.util.Objects;
+import java.util.UUID;
+import java.util.regex.Pattern;
 
 public class Register extends AppCompatActivity {
 
-    EditText email, uname, mno, gst, pwd;
-    String mail, userName, mobile, GST, pass;
-    TextView verify_text;
-    private static final int REQUEST_READ_PHONE_STATE = 1;
+
+    EditText email, uname, mno, gst, pwd, otp;
+    String mail ="", userName="", mobile="", GST="", pass="";
+    TextView verify_text, number_text;
+    private static final String PREF_KEY_DEVICE_ID = "device_id";
     Button register, verify;
     ImageView verify_mark;
+    private static final String MOBILE_NUMBER_REGEX = "^[6-9]\\d{9}$";
+    int count = 1;
+    // Pattern object for compiling the regular expression
+    private static final Pattern pattern = Pattern.compile(MOBILE_NUMBER_REGEX);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +55,85 @@ public class Register extends AppCompatActivity {
         mno = findViewById(R.id.register_mobile_no);
         gst = findViewById(R.id.gst_no);
         pwd = findViewById(R.id.register_password);
+        otp = findViewById(R.id.efit_otp);
+        number_text = findViewById(R.id.number_text);
         register = findViewById(R.id.register_button);
         verify = findViewById(R.id.verify_button_via_sms);
         verify_text = findViewById(R.id.verify_text);
         verify_mark = findViewById(R.id.verify_mark);
 
         verify.setOnClickListener(v -> {
-            verify_text.setVisibility(View.VISIBLE);
-            verify_mark.setVisibility(View.VISIBLE);
+            if(count == 1){
+                if (isValidMobileNumber(mno.getText().toString())) {
+
+                    Call<OtpGenerateDataModel> call = APIRequests.generateOtp(getDeviceIds(getApplicationContext()));
+                    call.enqueue(new Callback<OtpGenerateDataModel>() {
+                        @Override
+                        public void onResponse(@NonNull Call<OtpGenerateDataModel> call, @NonNull Response<OtpGenerateDataModel> response) {
+                            if (response.isSuccessful()) {
+                                assert response.body() != null;
+                                if (response.body().getActy()) {
+                                    verify.setText(R.string.verify);
+                                    mno.setVisibility(View.GONE);
+                                    number_text.setVisibility(View.GONE);
+                                    otp.setVisibility(View.VISIBLE);
+                                }
+                                else{
+                                    Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<OtpGenerateDataModel> call, @NonNull Throwable t) {
+                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Mobile Number is incorrect!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else if(count>2) {
+                if (isValidMobileNumber(mno.getText().toString())) {
+                    Call<UpdateUserDataModel> call = APIRequests.getOtpVerify(getDeviceIds(getApplicationContext()), otp.getText().toString());
+                    call.enqueue(new Callback<UpdateUserDataModel>() {
+                        @Override
+                        public void onResponse(@NonNull Call<UpdateUserDataModel> call, @NonNull Response<UpdateUserDataModel> response) {
+                            if (response.isSuccessful()) {
+                                assert response.body() != null;
+                                if (Objects.equals(response.body().getMsg(), "OTP Matched") && !Objects.equals(response.body().getUser(), "UNKNOWN")) {
+                                    verify.setVisibility(View.GONE);
+                                    mno.setVisibility(View.VISIBLE);
+                                    number_text.setVisibility(View.VISIBLE);
+                                    otp.setVisibility(View.GONE);
+                                    verify_text.setVisibility(View.VISIBLE);
+                                    verify_mark.setVisibility(View.VISIBLE);
+                                    mno.setFocusable(false);
+                                    mno.setClickable(false);
+                                    mno.setEnabled(false);
+                                }
+                                else{
+                                    Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<UpdateUserDataModel> call, @NonNull Throwable t) {
+                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Mobile Number is incorrect!!", Toast.LENGTH_SHORT).show();
+                }
+                count = 2;
+            }
+            count = count + 1;
         });
-        if (checkSelfPermission(android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
-        } else {
-            getIMEINumber();
-        }
+
         email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -77,6 +150,7 @@ public class Register extends AppCompatActivity {
                 // This method is called after the text has been changed.
             }
         });
+
         uname.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -146,48 +220,49 @@ public class Register extends AppCompatActivity {
             if (!mail.isEmpty() && !userName.isEmpty() &&
                     !mobile.isEmpty() && !GST.isEmpty() &&
                     !pass.isEmpty()) {
-                Call<Account> call = APIRequests.creatAcc(getIMEINumber(), userName, mobile, GST, pass, mail);
+                Call<Account> call = APIRequests.creatAcc(getDeviceIds(getApplicationContext()), userName, mobile, GST, pass, mail);
                 call.enqueue(new Callback<Account>() {
                     @Override
                     public void onResponse(@NonNull Call<Account> call, @NonNull Response<Account> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Account Created Successfully!!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Register.this, MainActivity.class);
-//                            finishAffinity();
-                            startActivity(intent);
+                            assert response.body() != null;
+                            if(response.body().getRes())
+                            {
+                                Toast.makeText(getApplicationContext(), "Account Created Successfully!!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Register.this, MainActivity.class);
+                                finishAffinity();
+                                startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<Account> call, @NonNull Throwable t) {
-                        // Handle failure
+                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "All Fields are necessary!!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public String getIMEINumber() {
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if (telephonyManager != null) {
-            String imei;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                imei = telephonyManager.getImei();
-            } else {
-                imei = telephonyManager.getDeviceId();
-            }
-            return imei;
-        }
-        return null;
+    public static boolean isValidMobileNumber(String mobileNumber) {
+        return pattern.matcher(mobileNumber).matches();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_READ_PHONE_STATE) {
-            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                finish();
-            }
+    public String getDeviceIds(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String deviceId = sharedPreferences.getString(PREF_KEY_DEVICE_ID, null);
+        if (deviceId == null) {
+            deviceId = UUID.randomUUID().toString();
+            sharedPreferences.edit().putString(PREF_KEY_DEVICE_ID, deviceId).apply();
         }
+        return deviceId;
     }
+
 }

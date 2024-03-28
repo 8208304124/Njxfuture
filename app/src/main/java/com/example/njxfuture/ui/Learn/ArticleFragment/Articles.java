@@ -1,5 +1,7 @@
 package com.example.njxfuture.ui.Learn.ArticleFragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,6 +26,8 @@ import com.example.njxfuture.databinding.FragmentArticlesBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,7 +56,7 @@ public class Articles extends Fragment {
 
         ArticleAdapter adapter = new ArticleAdapter(getContext(), new ArrayList<>()); // Initialize the adapter
         listView.setAdapter(adapter);
-        Call<List<ArticleDataModel>> call = APIRequests.fetchArticles("860114061759922",id);
+        Call<List<ArticleDataModel>> call = APIRequests.fetchArticles(getDeviceIds(requireContext()),id);
         call.enqueue(new Callback<List<ArticleDataModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<ArticleDataModel>> call, @NonNull Response<List<ArticleDataModel>> response) {
@@ -112,6 +116,7 @@ public class Articles extends Fragment {
 
         // Set custom ActionBar layout as ActionBar
         ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
+        assert actionBar != null;
         actionBar.setCustomView(actionBarView);
         TextView text= actionBarView.findViewById(R.id.learn_action_bar_title);
         text.setText(title);
@@ -140,7 +145,15 @@ public class Articles extends Fragment {
             progressBar.setVisibility(View.VISIBLE);
         }
     }
-
+    public String getDeviceIds(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String deviceId = sharedPreferences.getString("device_id", null);
+        if (deviceId == null) {
+            deviceId = UUID.randomUUID().toString();
+            sharedPreferences.edit().putString("device_id", deviceId).apply();
+        }
+        return deviceId;
+    }
     private void hideLoader() {
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
