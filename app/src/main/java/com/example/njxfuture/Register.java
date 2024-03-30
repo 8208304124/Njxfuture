@@ -40,6 +40,7 @@ public class Register extends AppCompatActivity {
     private static final String PREF_KEY_DEVICE_ID = "device_id";
     Button register, verify;
     ImageView verify_mark;
+    boolean otpCheck=false;
     private static final String MOBILE_NUMBER_REGEX = "^[6-9]\\d{9}$";
     int count = 1;
     // Pattern object for compiling the regular expression
@@ -108,6 +109,7 @@ public class Register extends AppCompatActivity {
                                     verify_text.setVisibility(View.VISIBLE);
                                     verify_mark.setVisibility(View.VISIBLE);
                                     mno.setFocusable(false);
+                                    otpCheck = true;
                                     mno.setClickable(false);
                                     mno.setEnabled(false);
                                 } else {
@@ -216,30 +218,35 @@ public class Register extends AppCompatActivity {
             if (!mail.isEmpty() && !userName.isEmpty() &&
                     !mobile.isEmpty() && !GST.isEmpty() &&
                     !pass.isEmpty()) {
-                Call<Account> call = APIRequests.creatAcc(getDeviceIds(getApplicationContext()), userName, mobile, GST, pass, mail);
-                call.enqueue(new Callback<Account>() {
-                    @Override
-                    public void onResponse(@NonNull Call<Account> call, @NonNull Response<Account> response) {
-                        if (response.isSuccessful()) {
-                            assert response.body() != null;
-                            if (response.body().getRes()) {
-                                Toast.makeText(getApplicationContext(), "Account Created Successfully!!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(Register.this, MainActivity.class);
-                                finishAffinity();
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                if(otpCheck){
+                    Call<Account> call = APIRequests.creatAcc(getDeviceIds(getApplicationContext()), userName, mobile, GST, pass, mail);
+                    call.enqueue(new Callback<Account>() {
+                        @Override
+                        public void onResponse(@NonNull Call<Account> call, @NonNull Response<Account> response) {
+                            if (response.isSuccessful()) {
+                                assert response.body() != null;
+                                if (response.body().getRes()) {
+                                    Toast.makeText(getApplicationContext(), "Account Created Successfully!!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(Register.this, MainActivity.class);
+                                    finishAffinity();
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(@NonNull Call<Account> call, @NonNull Throwable t) {
-                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(@NonNull Call<Account> call, @NonNull Throwable t) {
+                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Please verify Otp!!", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(getApplicationContext(), "All Fields are necessary!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please fill all the details!!", Toast.LENGTH_SHORT).show();
             }
         });
     }

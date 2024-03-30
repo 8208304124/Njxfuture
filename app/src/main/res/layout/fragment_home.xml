@@ -28,13 +28,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:src="@drawable/baseline_star_24" />
+                     android:layout_height="40dp"
+                    android:src="@drawable/stock_market_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:layout_marginTop="10sp"
                     android:text="Nifty Future Premium"
                     android:textColor="@color/grey" />
             </LinearLayout>
@@ -49,13 +50,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:src="@drawable/baseline_star_24" />
+                    android:layout_height="40dp"
+                    android:src="@drawable/investment_analysis_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:layout_marginTop="10sp"
                     android:text="Bank Nifty Platinum"
                     android:textColor="@color/grey" />
             </LinearLayout>
@@ -77,13 +79,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:src="@drawable/baseline_star_24" />
+                     android:layout_height="50dp"
+                    android:src="@drawable/project_analysis_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:layout_marginTop="10sp"
                     android:text="@string/option_platinum"
                     android:textColor="@color/grey" />
             </LinearLayout>
@@ -98,14 +101,15 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:src="@drawable/baseline_star_24" />
+                     android:layout_height="50dp"
+                    android:src="@drawable/investments_balance_svgrepo_com" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="Equity Future"
+                    android:layout_marginTop="10sp"
                     android:textColor="@color/grey" />
             </LinearLayout>
         </LinearLayout>
@@ -126,13 +130,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:src="@drawable/baseline_star_24" />
+                     android:layout_height="50dp"
+                    android:src="@drawable/supreme_court_justice_fairness_equity_svgrepo_com" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:layout_marginTop="10sp"
                     android:text="Equity Premium"
                     android:textColor="@color/grey" />
             </LinearLayout>
@@ -147,13 +152,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:src="@drawable/baseline_star_24" />
+                     android:layout_height="50dp"
+                    android:src="@drawable/stock_svgrepo_com" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:layout_marginTop="10sp"
                     android:text="Commodity Premium"
                     android:textColor="@color/grey" />
             </LinearLayout>
@@ -175,13 +181,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:src="@drawable/baseline_star_24" />
+                     android:layout_height="50dp"
+                    android:src="@drawable/currency_revenue_solid_svgrepo_com" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:layout_marginTop="10sp"
                     android:text="Currency Premium"
                     android:textColor="@color/grey" />
             </LinearLayout>
@@ -196,13 +203,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:src="@drawable/baseline_star_24" />
+                     android:layout_height="50dp"
+                    android:src="@drawable/money_svgrepo_com" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:layout_marginTop="10sp"
                     android:text="HNI Premium"
                     android:textColor="@color/grey" />
             </LinearLayout>

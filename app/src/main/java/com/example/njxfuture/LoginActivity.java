@@ -7,6 +7,8 @@ import android.os.Bundle;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,7 +27,7 @@ import java.util.UUID;
 public class LoginActivity extends AppCompatActivity {
     Button login;
     EditText uname, pass;
-    TextView register,forgotPass;
+    TextView register,forgotPass,help;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             pass = findViewById(R.id.user_pass);
             register = findViewById(R.id.register_layout);
             forgotPass=findViewById(R.id.forgot_pass);
+            help = findViewById(R.id.help);
             login.setOnClickListener(View ->CallLogin(uname.getText().toString(), pass.getText().toString()));
             register.setOnClickListener(v->{
                 Intent intent = new Intent(this,Register.class);
@@ -42,16 +45,21 @@ public class LoginActivity extends AppCompatActivity {
             });
             forgotPass.setOnClickListener(v->{
                 Intent intent = new Intent(getApplicationContext(), WebView1.class);
-                intent.putExtra("url", "http://njx.revacg.in/");
+                intent.putExtra("url", "https://njx.revacg.in/fpass.php?u=asd&p=123456");
                 startActivity(intent);
             });
-
+            help.setOnClickListener(v->{
+                Intent intent = new Intent(getApplicationContext(), WebView1.class);
+                intent.putExtra("url", "https://njx.revacg.in/help.php?u=asd&p=123456");
+                startActivity(intent);
+            });
     }
     void CallLogin(String uname, String pass){
         Call<UpdateUserDataModel> call = APIRequests.getUserLogin(getDeviceIds(getApplicationContext()),uname,pass);
         call.enqueue(new Callback<UpdateUserDataModel>() {
             @Override
             public void onResponse(@NonNull Call<UpdateUserDataModel> call, @NonNull Response<UpdateUserDataModel> response) {
+
                 if (response.isSuccessful()) {
                     UpdateUserDataModel user = response.body();
                     assert user != null;

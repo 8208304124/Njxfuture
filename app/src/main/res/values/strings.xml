@@ -86,4 +86,19 @@
     <string name="enter_gst_no">Enter GST no.</string>
     <string name="enter_otp">Enter OTP</string>
     <string name="verify">Verify</string>
+    <string name="profile">PROFILE</string>
+    <string name="raise_view_queries">Raise/View Queries</string>
+    <string name="write_email_to_us">Write Email to Us</string>
+    <string name="connect_on_whatsapp">Connect on WhatsApp</string>
+    <string name="connect_on_instagram">Connect on Instagram</string>
+    <string name="connect_on_facebook">Connect on Facebook</string>
+    <string name="connect_on_twitter">Connect on Twitter</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="contact_us1">CONTACT US</string>
+    <string name="social_media">SOCIAL MEDIA</string>
+    <string name="whatsapp">Whatsapp</string>
+    <string name="linkdin">LinkdIn</string>
+    <string name="twitter">Twitter</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
 </resources>
