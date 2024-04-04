@@ -26,6 +26,7 @@ import retrofit2.Response;
 import com.example.njxfuture.API.DataModels.Account;
 import com.example.njxfuture.API.DataModels.OtpGenerateDataModel;
 import com.example.njxfuture.API.DataModels.UpdateUserDataModel;
+import com.example.njxfuture.API.UserCredentialsManager;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -226,6 +227,8 @@ public class Register extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 assert response.body() != null;
                                 if (response.body().getRes()) {
+                                    UserCredentialsManager credentialsManager = new UserCredentialsManager(getApplicationContext());
+                                    credentialsManager.saveCredentials(userName, pass, getDeviceIds(getApplicationContext()));
                                     Toast.makeText(getApplicationContext(), "Account Created Successfully!!", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(Register.this, MainActivity.class);
                                     finishAffinity();

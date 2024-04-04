@@ -5,6 +5,7 @@ import com.example.njxfuture.API.DataModels.ArticleData.ArticleDataModel;
 import com.example.njxfuture.API.DataModels.NotificationDataModel;
 import com.example.njxfuture.API.DataModels.OtpGenerateDataModel;
 import com.example.njxfuture.API.DataModels.PackageDataModel.PackageDetailsDataModel;
+import com.example.njxfuture.API.DataModels.PushNotificationDataModel;
 import com.example.njxfuture.API.DataModels.UpdateUserDataModel;
 import com.example.njxfuture.API.DataModels.User;
 import com.example.njxfuture.API.DataModels.UserModel;
@@ -24,7 +25,14 @@ public class APIRequests {
         @GET("/checkimei.php")
         Call<UserModel> getData(@Query("imeival") String param1);
     }
-
+    interface ReadNotify {
+        @GET("/pushred.php")
+        Call<List<String>> getData(@Query("imeival") String param1,@Query("nid") String nid);
+    }
+    interface PushNotification {
+        @GET("/pushnot.php")
+        Call<List<PushNotificationDataModel>> getData(@Query("imeival") String param1);
+    }
     interface GenerateOtp {
         @GET("/genotp.php")
         Call<OtpGenerateDataModel> getData(@Query("imeival") String param1, @Query("mno") String param2);
@@ -101,12 +109,15 @@ public class APIRequests {
     private static final Login getLogin = retrofit.create(Login.class);
     private static final OtpVerify otpVerify = retrofit.create(OtpVerify.class);
     private static final GenerateOtp getOtpVerify = retrofit.create(GenerateOtp.class);
+    private static final PushNotification getPushNotification = retrofit.create(PushNotification.class);
 
     // Define a method to make API requests
     public static Call<UserModel> fetchData(String param1) {
         return apiService.getData(param1);
     }
-
+    public static Call<List<PushNotificationDataModel>> getPushNotify(String param1) {
+        return getPushNotification.getData(param1);
+    }
     public static Call<UpdateUserDataModel> getOtpVerify(String param1, String otp, String mno) {
         return otpVerify.getData(param1, otp, mno);
     }

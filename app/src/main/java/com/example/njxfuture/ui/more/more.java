@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.njxfuture.API.UserCredentialsManager;
 import com.example.njxfuture.R;
 import com.example.njxfuture.WebView1;
 import com.example.njxfuture.databinding.FragmentMoreBinding;
@@ -45,7 +46,7 @@ public class more extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         MoreViewModel moreViewModel = new ViewModelProvider(this).get(MoreViewModel.class);
-
+        UserCredentialsManager credentialsManager = new UserCredentialsManager(getContext());
         com.example.njxfuture.databinding.FragmentMoreBinding binding = FragmentMoreBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         editProfile = binding.editProfile;
@@ -94,8 +95,11 @@ public class more extends Fragment {
             startActivity(emailIntent);
         });
         helps.setOnClickListener(v -> {
+
+            String pwd = credentialsManager.getPassword();
+            String pname = credentialsManager.getUsername();
             Intent intent = new Intent(getContext(), WebView1.class);
-            intent.putExtra("url", "https://njx.revacg.in/help.php?u=asd&p=123456");
+            intent.putExtra("url", "https://njx.revacg.in/help.php?u="+pname+"&p="+pwd);
             startActivity(intent);
         });
         facebok.setOnClickListener(v -> {

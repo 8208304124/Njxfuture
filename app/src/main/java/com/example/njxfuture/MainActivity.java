@@ -1,9 +1,13 @@
 package com.example.njxfuture;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.example.njxfuture.ViewPager.NotificationService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Start the NotificationService
 
+        Intent serviceIntent = new Intent(this, NotificationService.class);
+        startService(serviceIntent);
         com.example.njxfuture.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -34,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        Intent intents = getIntent();
+        if(intents.hasExtra("notification_id") && intents.hasExtra("notification_tab")){
+            navController.navigate(R.id.navigation_notifications);
+        }
         //bottom navigation
         bottomNavigationView.setItemIconTintList(ContextCompat.getColorStateList(this, R.color.bottom_navigation_color));
         bottomNavigationView.setItemTextColor(ContextCompat.getColorStateList(this, R.color.bottom_navigation_color));

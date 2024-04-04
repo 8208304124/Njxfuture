@@ -74,6 +74,7 @@ public class NotificationAdapter extends ArrayAdapter<NotificationDataModel> {
             dates.setText(formatDateTime(items.get(position).getPdt()));
         }
         view.setOnClickListener(v->{
+
             Bundle bundle = new Bundle();
             bundle.putString("pckid", items.get(position).getpckid());
             NavController navController = Navigation.findNavController((Activity) context, R.id.nav_host_fragment_activity_main);

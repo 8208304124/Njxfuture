@@ -2,6 +2,7 @@ package com.example.njxfuture.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,8 +50,9 @@ public class notification_fragment_tab_all extends Fragment {
         View root = binding.getRoot();
         progressBar = root.findViewById(R.id.progressBar);
         listView = binding.notificationList;
+
         showLoader();
-        Call<List<NotificationDataModel>> call = APIRequests.fetchNotifications(getDeviceIds(requireContext()));
+        Call<List<NotificationDataModel>> call = APIRequests.fetchNotifications("79489f81-16dd-45d8-ab13-39d8635b0857");
         call.enqueue(new Callback<List<NotificationDataModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<NotificationDataModel>> call, @NonNull Response<List<NotificationDataModel>> response) {
