@@ -2,30 +2,24 @@ package com.example.njxfuture.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.njxfuture.API.APIRequests;
 import com.example.njxfuture.API.DataModels.NotificationDataModel;
 import com.example.njxfuture.R;
 import com.example.njxfuture.databinding.FragmentNotificationTabAllBinding;
-import com.example.njxfuture.databinding.FragmentNotificationsBinding;
 import com.example.njxfuture.ui.Adapters.NotificationAdapter;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,7 +46,7 @@ public class notification_fragment_tab_all extends Fragment {
         listView = binding.notificationList;
 
         showLoader();
-        Call<List<NotificationDataModel>> call = APIRequests.fetchNotifications("79489f81-16dd-45d8-ab13-39d8635b0857");
+        Call<List<NotificationDataModel>> call = APIRequests.fetchNotifications(getDeviceIds(requireContext()));
         call.enqueue(new Callback<List<NotificationDataModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<NotificationDataModel>> call, @NonNull Response<List<NotificationDataModel>> response) {

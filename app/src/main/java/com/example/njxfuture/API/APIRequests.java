@@ -100,6 +100,8 @@ public class APIRequests {
 
     // Create an instance of the API interface
     private static final MyApiService apiService = retrofit.create(MyApiService.class);
+
+    private static final ReadNotify getRead = retrofit.create(ReadNotify.class);
     private static final CreateAccount createAccount = retrofit.create(CreateAccount.class);
     private static final Articles articlesFetch = retrofit.create(Articles.class);
     private static final Notifications notificationFetch = retrofit.create(Notifications.class);
@@ -112,6 +114,10 @@ public class APIRequests {
     private static final PushNotification getPushNotification = retrofit.create(PushNotification.class);
 
     // Define a method to make API requests
+
+    public static Call<List<String>> readNotify(String param1, String param2) {
+        return getRead.getData(param1,param2);
+    }
     public static Call<UserModel> fetchData(String param1) {
         return apiService.getData(param1);
     }

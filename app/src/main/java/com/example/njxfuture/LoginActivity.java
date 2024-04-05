@@ -82,8 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void CallLogin(String name, String passs) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
+
         Call<UpdateUserDataModel> call = APIRequests.getUserLogin(getDeviceIds(getApplicationContext()), name, passs);
         call.enqueue(new Callback<UpdateUserDataModel>() {
             @Override
@@ -96,7 +95,8 @@ public class LoginActivity extends AppCompatActivity {
                         // Save credentials
                         UserCredentialsManager credentialsManager = new UserCredentialsManager(getApplicationContext());
                         credentialsManager.saveCredentials(name, passs, getDeviceIds(getApplicationContext()));
-
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), user.getMsg(), Toast.LENGTH_LONG).show();

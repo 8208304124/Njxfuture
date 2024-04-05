@@ -1,23 +1,26 @@
 package com.example.njxfuture.API.DataModels;
 
 public class NotificationDataModel {
-    private String pid,pckimg,tip,pckid,pdt,art;
+    private String pid,pckimg,tip,pckid,pdt,art,nid;
 
     // Constructor
-    public NotificationDataModel(String tip, String pid, String pckimg, String pdt, String pckid, String art) {
+    public NotificationDataModel(String tip, String pid, String pckimg, String pdt, String pckid, String art, String nid) {
         this.tip = tip;
         this.pid = pid;
         this.pckimg = pckimg;
         this.pdt = pdt;
         this.pckid = pckid;
         this.art = art;
+        this.nid = nid;
     }
 
     // Getters and setters
     public String gettip() {
         return tip;
     }
-
+    public String getnid() {
+        return nid;
+    }
     public void settip(String tip) {
         this.tip = tip;
     }

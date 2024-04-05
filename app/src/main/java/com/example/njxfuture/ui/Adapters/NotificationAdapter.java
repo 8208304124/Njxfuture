@@ -3,6 +3,7 @@ package com.example.njxfuture.ui.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.njxfuture.API.APIRequests;
 import com.example.njxfuture.API.DataModels.NotificationDataModel;
 import com.example.njxfuture.R;
 import com.example.njxfuture.ui.notifications.NotificationsFragment;
@@ -35,9 +38,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NotificationAdapter extends ArrayAdapter<NotificationDataModel> {
 
@@ -74,7 +82,20 @@ public class NotificationAdapter extends ArrayAdapter<NotificationDataModel> {
             dates.setText(formatDateTime(items.get(position).getPdt()));
         }
         view.setOnClickListener(v->{
+            Call<List<String>> call = APIRequests.readNotify(getDeviceIds(getContext()),items.get(position).getnid());
+            call.enqueue(new Callback<List<String>>() {
+                @Override
+                public void onResponse(@NonNull Call<List<String>> call, @NonNull Response<List<String>> response) {
+                    if (response.isSuccessful()) {
 
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<List<String>> call, @NonNull Throwable t) {
+                    Log.e("API_CALL", "API call failed: " + t.getMessage());
+                }
+            });
             Bundle bundle = new Bundle();
             bundle.putString("pckid", items.get(position).getpckid());
             NavController navController = Navigation.findNavController((Activity) context, R.id.nav_host_fragment_activity_main);
@@ -97,6 +118,15 @@ public class NotificationAdapter extends ArrayAdapter<NotificationDataModel> {
         } catch (ParseException e) {
             return ""; // Return empty string if parsing fails
         }
+    }
+    public String getDeviceIds(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String deviceId = sharedPreferences.getString("device_id", null);
+        if (deviceId == null) {
+            deviceId = UUID.randomUUID().toString();
+            sharedPreferences.edit().putString("device_id", deviceId).apply();
+        }
+        return deviceId;
     }
 //    private void colorizeUrls(TextView textView, String message) {
 //        Pattern pattern = Patterns.WEB_URL;

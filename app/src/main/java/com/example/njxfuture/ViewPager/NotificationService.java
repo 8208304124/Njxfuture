@@ -5,7 +5,9 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -32,6 +34,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -83,7 +86,7 @@ public class NotificationService extends Service {
     }
 
     private void fetchNotification() {
-        Call<List<PushNotificationDataModel>> call = APIRequests.getPushNotify("79489f81-16dd-45d8-ab13-39d8635b0857");
+        Call<List<PushNotificationDataModel>> call = APIRequests.getPushNotify(getDeviceIds(getApplicationContext()));
         call.enqueue(new Callback<List<PushNotificationDataModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<PushNotificationDataModel>> call, @NonNull Response<List<PushNotificationDataModel>> response) {
@@ -192,7 +195,15 @@ public class NotificationService extends Service {
         }).start();
     }
 
-
+    public String getDeviceIds(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String deviceId = sharedPreferences.getString("device_id", null);
+        if (deviceId == null) {
+            deviceId = UUID.randomUUID().toString();
+            sharedPreferences.edit().putString("device_id", deviceId).apply();
+        }
+        return deviceId;
+    }
     public Bitmap drawableToBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
