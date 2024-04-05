@@ -41,7 +41,7 @@ public class Register extends AppCompatActivity {
     private static final String PREF_KEY_DEVICE_ID = "device_id";
     Button register, verify;
     ImageView verify_mark;
-    boolean otpCheck=false;
+    boolean otpCheck = false;
     private static final String MOBILE_NUMBER_REGEX = "^[6-9]\\d{9}$";
     int count = 1;
     // Pattern object for compiling the regular expression
@@ -219,7 +219,7 @@ public class Register extends AppCompatActivity {
             if (!mail.isEmpty() && !userName.isEmpty() &&
                     !mobile.isEmpty() && !GST.isEmpty() &&
                     !pass.isEmpty()) {
-                if(otpCheck){
+                if (otpCheck) {
                     Call<Account> call = APIRequests.creatAcc(getDeviceIds(getApplicationContext()), userName, mobile, GST, pass, mail);
                     call.enqueue(new Callback<Account>() {
                         @Override
@@ -244,8 +244,7 @@ public class Register extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Please verify Otp!!", Toast.LENGTH_SHORT).show();
                 }
             } else {

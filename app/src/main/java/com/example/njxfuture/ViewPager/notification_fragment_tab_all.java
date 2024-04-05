@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 
 public class notification_fragment_tab_all extends Fragment {
-  private @NonNull FragmentNotificationTabAllBinding binding;
+    private @NonNull FragmentNotificationTabAllBinding binding;
 
 
     ListView listView;
@@ -51,8 +51,7 @@ public class notification_fragment_tab_all extends Fragment {
             @Override
             public void onResponse(@NonNull Call<List<NotificationDataModel>> call, @NonNull Response<List<NotificationDataModel>> response) {
                 if (response.isSuccessful()) {
-                    if(response.body()!=null)
-                    {
+                    if (response.body() != null) {
                         hideLoader();
                         NotificationAdapter notify = new NotificationAdapter(getContext(), response.body());
                         listView.setAdapter(notify);
@@ -72,11 +71,13 @@ public class notification_fragment_tab_all extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     }
+
     private void showLoader() {
         if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);
         }
     }
+
     public String getDeviceIds(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String deviceId = sharedPreferences.getString("device_id", null);
@@ -86,6 +87,7 @@ public class notification_fragment_tab_all extends Fragment {
         }
         return deviceId;
     }
+
     private void hideLoader() {
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);

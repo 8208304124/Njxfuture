@@ -25,14 +25,17 @@ public class APIRequests {
         @GET("/checkimei.php")
         Call<UserModel> getData(@Query("imeival") String param1);
     }
+
     interface ReadNotify {
         @GET("/pushred.php")
-        Call<List<String>> getData(@Query("imeival") String param1,@Query("nid") String nid);
+        Call<List<String>> getData(@Query("imeival") String param1, @Query("nid") String nid);
     }
+
     interface PushNotification {
         @GET("/pushnot.php")
         Call<List<PushNotificationDataModel>> getData(@Query("imeival") String param1);
     }
+
     interface GenerateOtp {
         @GET("/genotp.php")
         Call<OtpGenerateDataModel> getData(@Query("imeival") String param1, @Query("mno") String param2);
@@ -116,14 +119,17 @@ public class APIRequests {
     // Define a method to make API requests
 
     public static Call<List<String>> readNotify(String param1, String param2) {
-        return getRead.getData(param1,param2);
+        return getRead.getData(param1, param2);
     }
+
     public static Call<UserModel> fetchData(String param1) {
         return apiService.getData(param1);
     }
+
     public static Call<List<PushNotificationDataModel>> getPushNotify(String param1) {
         return getPushNotification.getData(param1);
     }
+
     public static Call<UpdateUserDataModel> getOtpVerify(String param1, String otp, String mno) {
         return otpVerify.getData(param1, otp, mno);
     }

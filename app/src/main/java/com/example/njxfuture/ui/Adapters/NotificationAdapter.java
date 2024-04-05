@@ -81,8 +81,8 @@ public class NotificationAdapter extends ArrayAdapter<NotificationDataModel> {
             TextView dates = view.findViewById(R.id.date);
             dates.setText(formatDateTime(items.get(position).getPdt()));
         }
-        view.setOnClickListener(v->{
-            Call<List<String>> call = APIRequests.readNotify(getDeviceIds(getContext()),items.get(position).getnid());
+        view.setOnClickListener(v -> {
+            Call<List<String>> call = APIRequests.readNotify(getDeviceIds(getContext()), items.get(position).getnid());
             call.enqueue(new Callback<List<String>>() {
                 @Override
                 public void onResponse(@NonNull Call<List<String>> call, @NonNull Response<List<String>> response) {
@@ -99,7 +99,7 @@ public class NotificationAdapter extends ArrayAdapter<NotificationDataModel> {
             Bundle bundle = new Bundle();
             bundle.putString("pckid", items.get(position).getpckid());
             NavController navController = Navigation.findNavController((Activity) context, R.id.nav_host_fragment_activity_main);
-            navController.navigate(R.id.package_details,bundle);
+            navController.navigate(R.id.package_details, bundle);
         });
         return view;
     }
@@ -119,6 +119,7 @@ public class NotificationAdapter extends ArrayAdapter<NotificationDataModel> {
             return ""; // Return empty string if parsing fails
         }
     }
+
     public String getDeviceIds(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String deviceId = sharedPreferences.getString("device_id", null);

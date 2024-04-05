@@ -1,7 +1,7 @@
 package com.example.njxfuture.API.DataModels;
 
 public class NotificationDataModel {
-    private String pid,pckimg,tip,pckid,pdt,art,nid;
+    private String pid, pckimg, tip, pckid, pdt, art, nid;
 
     // Constructor
     public NotificationDataModel(String tip, String pid, String pckimg, String pdt, String pckid, String art, String nid) {
@@ -18,9 +18,11 @@ public class NotificationDataModel {
     public String gettip() {
         return tip;
     }
+
     public String getnid() {
         return nid;
     }
+
     public void settip(String tip) {
         this.tip = tip;
     }

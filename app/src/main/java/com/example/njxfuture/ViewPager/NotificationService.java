@@ -28,6 +28,7 @@ import com.example.njxfuture.API.APIRequests;
 import com.example.njxfuture.API.DataModels.PushNotificationDataModel;
 import com.example.njxfuture.MainActivity;
 import com.example.njxfuture.R;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -95,7 +96,7 @@ public class NotificationService extends Service {
                         List<PushNotificationDataModel> pushNotify = response.body();
                         for (int i = 0; i < pushNotify.size(); i++) {
                             showNotification(pushNotify.get(i).gettitle(), pushNotify.get(i).getdtxt(),
-                                    pushNotify.get(i).getpckimg(),pushNotify.get(i).getnid());
+                                    pushNotify.get(i).getpckimg(), pushNotify.get(i).getnid());
                         }
                     }
                 }
@@ -204,6 +205,7 @@ public class NotificationService extends Service {
         }
         return deviceId;
     }
+
     public Bitmap drawableToBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();

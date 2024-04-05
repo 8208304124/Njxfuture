@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             String pwd = credentialsManager.getPassword();
             String pname = credentialsManager.getUsername();
             Intent intent = new Intent(getApplicationContext(), WebView1.class);
-            intent.putExtra("url", "https://njx.revacg.in/help.php?u="+pname+"&p="+pwd);
+            intent.putExtra("url", "https://njx.revacg.in/help.php?u=" + pname + "&p=" + pwd);
             startActivity(intent);
         });
     }
