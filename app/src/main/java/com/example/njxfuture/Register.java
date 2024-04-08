@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -219,44 +220,130 @@ public class Register extends AppCompatActivity {
             if (!mail.isEmpty() && !userName.isEmpty() &&
                     !mobile.isEmpty() && !GST.isEmpty() &&
                     !pass.isEmpty()) {
-                if (otpCheck) {
-                    Call<Account> call = APIRequests.creatAcc(getDeviceIds(getApplicationContext()), userName, mobile, GST, pass, mail);
-                    call.enqueue(new Callback<Account>() {
-                        @Override
-                        public void onResponse(@NonNull Call<Account> call, @NonNull Response<Account> response) {
-                            if (response.isSuccessful()) {
-                                assert response.body() != null;
-                                if (response.body().getRes()) {
-                                    UserCredentialsManager credentialsManager = new UserCredentialsManager(getApplicationContext());
-                                    credentialsManager.saveCredentials(userName, pass, getDeviceIds(getApplicationContext()));
-                                    Toast.makeText(getApplicationContext(), "Account Created Successfully!!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(Register.this, MainActivity.class);
-                                    finishAffinity();
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
-                                }
+                if (!isValidEmail(mail)) {
+                    Toast.makeText(getApplicationContext(), "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!isValidGST(GST)) {
+                        Toast.makeText(getApplicationContext(), "Please enter a valid GST Number.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if(!isValidPassword(pass)){
+                            Toast.makeText(getApplicationContext(), "Password length should be 8-20 and contain One Uppercase letter, One Lowercase Letter, One Digit and One Special Character.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            if (otpCheck) {
+                                Call<Account> call = APIRequests.creatAcc(getDeviceIds(getApplicationContext()), userName, mobile, GST, pass, mail);
+                                call.enqueue(new Callback<Account>() {
+                                    @Override
+                                    public void onResponse(@NonNull Call<Account> call, @NonNull Response<Account> response) {
+                                        if (response.isSuccessful()) {
+                                            assert response.body() != null;
+                                            if (response.body().getRes()) {
+                                                UserCredentialsManager credentialsManager = new UserCredentialsManager(getApplicationContext());
+                                                credentialsManager.saveCredentials(userName, pass, getDeviceIds(getApplicationContext()));
+                                                Toast.makeText(getApplicationContext(), "Account Created Successfully!!", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(Register.this, MainActivity.class);
+                                                finishAffinity();
+                                                startActivity(intent);
+                                            } else {
+                                                Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(@NonNull Call<Account> call, @NonNull Throwable t) {
+                                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Please verify Otp!!", Toast.LENGTH_SHORT).show();
                             }
                         }
-
-                        @Override
-                        public void onFailure(@NonNull Call<Account> call, @NonNull Throwable t) {
-                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } else {
-                    Toast.makeText(getApplicationContext(), "Please verify Otp!!", Toast.LENGTH_SHORT).show();
                 }
+            }
             } else {
                 Toast.makeText(getApplicationContext(), "Please fill all the details!!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    public static boolean isValidPassword(String password) {
+        // Define your password validation rules here
+          final int MIN_LENGTH = 8; // Minimum password length
+          final int MAX_LENGTH = 20; // Maximum password length
+          final String SPECIAL_CHARACTERS = "!@#$%^&*()_+\\-=[]{}|;:'\",.<>?"; // Special characters allowed
+
+        // Check if the password is null or empty
+        if (password == null || password.isEmpty()) {
+            return false;
+        }
+
+        // Check if the password length is within the allowed range
+        int length = password.length();
+        if (length < MIN_LENGTH || length > MAX_LENGTH) {
+            return false;
+        }
+
+        // Check if the password contains at least one uppercase letter
+        if (!password.matches(".*[A-Z].*")) {
+            return false;
+        }
+
+        // Check if the password contains at least one lowercase letter
+        if (!password.matches(".*[a-z].*")) {
+            return false;
+        }
+
+        // Check if the password contains at least one digit
+        if (!password.matches(".*\\d.*")) {
+            return false;
+        }
+
+        // Check if the password contains at least one special character
+        if (!password.matches(".*[" + escapeSpecialCharacters(SPECIAL_CHARACTERS) + "].*")) {
+            return false;
+        }
+
+
+        // Password meets all validation criteria
+        return true;
+    }
+    // Method to escape special characters for regex
+    private static String escapeSpecialCharacters(String input) {
+        return input.replaceAll("([\\\\\\[\\](){}+\\-?*.^$|])", "\\\\$1");
+    }
     public static boolean isValidMobileNumber(String mobileNumber) {
         return pattern.matcher(mobileNumber).matches();
     }
+    public static boolean isValidEmail(CharSequence email) {
+        return (email != null && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    }
+    public static boolean isValidGST(String gstNumber) {
+        // GST number should be 15 characters long
+        if (gstNumber.length() != 15)
+            return false;
 
+        // GSTIN Format: first two characters should be alphabets
+        String firstTwoChars = gstNumber.substring(0, 2);
+        if (!firstTwoChars.matches("[A-Z]+"))
+            return false;
+
+        // GSTIN Format: Next 10 characters should be digits
+        String middleChars = gstNumber.substring(2, 12);
+        if (!middleChars.matches("[0-9]+"))
+            return false;
+
+        // GSTIN Format: 13th character should be the state code
+        char stateCodeChar = gstNumber.charAt(12);
+        if (!Character.isDigit(stateCodeChar))
+            return false;
+
+        // GSTIN Format: Last two characters should be alphabets or numerals
+        String lastTwoChars = gstNumber.substring(13);
+        if (!lastTwoChars.matches("[0-9A-Z]+"))
+            return false;
+
+        return true;
+    }
     public String getDeviceIds(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String deviceId = sharedPreferences.getString(PREF_KEY_DEVICE_ID, null);
