@@ -11,12 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
+import java.util.regex.Pattern;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,16 +24,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.njxfuture.API.APIRequests;
-import com.example.njxfuture.API.DataModels.ArticleData.ArticleDataModel;
 import com.example.njxfuture.API.DataModels.UpdateUserDataModel;
 import com.example.njxfuture.API.DataModels.User;
-import com.example.njxfuture.databinding.FragmentArticlesBinding;
 import com.example.njxfuture.databinding.FragmentEditProfileBinding;
 
 import java.util.List;
@@ -53,6 +49,8 @@ public class EditProfile extends Fragment implements View.OnTouchListener {
     private Drawable eyeIcon;
     private boolean isPasswordVisible = false;
     private ProgressBar progressBar;
+    private static final String MOBILE_NUMBER_REGEX = "^[6-9]\\d{9}$";
+    private static final Pattern pattern = Pattern.compile(MOBILE_NUMBER_REGEX);
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -181,29 +179,117 @@ public class EditProfile extends Fragment implements View.OnTouchListener {
         binding.updateBtn.setOnClickListener(v -> {
             showLoader();
             if (!uname.isEmpty() && !umail.isEmpty() && !upwd.isEmpty() && !ugst.isEmpty() && !uno.isEmpty()) {
-                Call<UpdateUserDataModel> call1 = APIRequests.updateUserDetails(getDeviceIds(requireContext()),uname,uno,ugst,upwd,umail);
-                call1.enqueue(new Callback<UpdateUserDataModel>() {
-                    @Override
-                    public void onResponse(@NonNull Call<UpdateUserDataModel> call, @NonNull Response<UpdateUserDataModel> response) {
-                        if (response.isSuccessful()) {
-                            if (response.body() != null) {
-                                hideLoader();
-                                Toast.makeText(getContext(),"Update Successfully!!",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
+                if (!isValidEmail(umail)) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!isValidGST(ugst)) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Please enter a valid GST Number.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if(!isValidPassword(upwd)){
+                            Toast.makeText(getActivity().getApplicationContext(), "Password length should be 8-20 and contain One Uppercase letter, One Lowercase Letter, One Digit and One Special Character.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Call<UpdateUserDataModel> call1 = APIRequests.updateUserDetails(getDeviceIds(requireContext()), uname, uno, ugst, upwd, umail);
+                            call1.enqueue(new Callback<UpdateUserDataModel>() {
+                                @Override
+                                public void onResponse(@NonNull Call<UpdateUserDataModel> call, @NonNull Response<UpdateUserDataModel> response) {
+                                    if (response.isSuccessful()) {
+                                        if (response.body() != null) {
+                                            hideLoader();
+                                            Toast.makeText(getContext(), "Update Successfully!!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
 
-                    @Override
-                    public void onFailure(@NonNull Call<UpdateUserDataModel> call, @NonNull Throwable t) {
-                        Log.e("API_CALL", "API call failed: " + t.getMessage());
-                    }
-                });
+                                @Override
+                                public void onFailure(@NonNull Call<UpdateUserDataModel> call, @NonNull Throwable t) {
+                                    Log.e("API_CALL", "API call failed: " + t.getMessage());
+                                }
+                            });
+                        }}}
+
             }
         });
         setCustomActionBar();
         return root;
     }
+                public static boolean isValidPassword(String password) {
+                    // Define your password validation rules here
+                    final int MIN_LENGTH = 8; // Minimum password length
+                    final int MAX_LENGTH = 20; // Maximum password length
+                    final String SPECIAL_CHARACTERS = "!@#$%^&*()_+\\-=[]{}|;:'\",.<>?"; // Special characters allowed
 
+                    // Check if the password is null or empty
+                    if (password == null || password.isEmpty()) {
+                        return false;
+                    }
+
+                    // Check if the password length is within the allowed range
+                    int length = password.length();
+                    if (length < MIN_LENGTH || length > MAX_LENGTH) {
+                        return false;
+                    }
+
+                    // Check if the password contains at least one uppercase letter
+                    if (!password.matches(".*[A-Z].*")) {
+                        return false;
+                    }
+
+                    // Check if the password contains at least one lowercase letter
+                    if (!password.matches(".*[a-z].*")) {
+                        return false;
+                    }
+
+                    // Check if the password contains at least one digit
+                    if (!password.matches(".*\\d.*")) {
+                        return false;
+                    }
+
+                    // Check if the password contains at least one special character
+                    if (!password.matches(".*[" + escapeSpecialCharacters(SPECIAL_CHARACTERS) + "].*")) {
+                        return false;
+                    }
+
+
+                    // Password meets all validation criteria
+                    return true;
+                }
+                // Method to escape special characters for regex
+                private static String escapeSpecialCharacters(String input) {
+                    return input.replaceAll("([\\\\\\[\\](){}+\\-?*.^$|])", "\\\\$1");
+                }
+                public static boolean isValidMobileNumber(String mobileNumber) {
+                    return pattern.matcher(mobileNumber).matches();
+                }
+                public static boolean isValidEmail(CharSequence email) {
+                    return (email != null && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+                }
+                public static boolean isValidGST(String gstNumber) {
+                    // GST number should be 15 characters long
+                    if (gstNumber.length() != 15)
+                        return false;
+
+                    // GSTIN Format: first two characters should be alphabets
+                    String firstTwoChars = gstNumber.substring(0, 2);
+                    if (!firstTwoChars.matches("[A-Z]+"))
+                        return false;
+
+                    // GSTIN Format: Next 10 characters should be digits
+                    String middleChars = gstNumber.substring(2, 12);
+                    if (!middleChars.matches("[0-9]+"))
+                        return false;
+
+                    // GSTIN Format: 13th character should be the state code
+                    char stateCodeChar = gstNumber.charAt(12);
+                    if (!Character.isDigit(stateCodeChar))
+                        return false;
+
+                    // GSTIN Format: Last two characters should be alphabets or numerals
+                    String lastTwoChars = gstNumber.substring(13);
+                    if (!lastTwoChars.matches("[0-9A-Z]+"))
+                        return false;
+
+                    return true;
+                }
     private void setCustomActionBar() {
         // Inflate the custom ActionBar layout
         View actionBarView = LayoutInflater.from(requireContext()).inflate(R.layout.edit_profile_action_bar, null);
