@@ -2,6 +2,7 @@ package com.example.njxfuture;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
@@ -26,7 +27,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Start the NotificationService
-
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        // Set the default night mode for the app
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            setTheme(R.style.Theme_Dark);
+        } else {
+            setTheme(R.style.Theme_DayMode);
+        }
         Intent serviceIntent = new Intent(this, NotificationService.class);
         startService(serviceIntent);
         com.example.njxfuture.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());

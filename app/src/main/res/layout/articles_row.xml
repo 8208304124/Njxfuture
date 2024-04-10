@@ -4,7 +4,6 @@
     android:id="@+id/article_rowId"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/light_dark"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -46,8 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
-                android:text="Shubham Agarwal"
-                android:textColor="@color/white" />
+                android:text="Shubham Agarwal" />
         </LinearLayout>
     </LinearLayout>
 

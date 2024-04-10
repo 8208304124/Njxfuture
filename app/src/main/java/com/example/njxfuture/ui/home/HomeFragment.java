@@ -1,5 +1,6 @@
 package com.example.njxfuture.ui.home;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,6 +30,13 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        // Set the default night mode for the app
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            root.setBackgroundColor(getResources().getColor(R.color.dark));
+        } else {
+            root.setBackgroundColor(getResources().getColor(R.color.white));
+        }
         Bundle bundle = new Bundle();
         binding.niftyPremium.setOnClickListener(v->{
             bundle.putString("pckid", "1");

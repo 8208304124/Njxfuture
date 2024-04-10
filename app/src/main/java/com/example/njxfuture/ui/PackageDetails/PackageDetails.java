@@ -3,6 +3,7 @@ package com.example.njxfuture.ui.PackageDetails;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,13 @@ public class PackageDetails extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentPackageDetailsBinding.inflate(inflater, container, false);
         tabLayout = binding.packageTabs;
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        // Set the default night mode for the app
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.tabsDark));
+        } else {
+           tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
+        }
         tabLayout.setTabTextColors(ContextCompat.getColorStateList(getContext(), R.color.tab_color_selector));
         FragmentManager fragmentManager = getFragmentManager();
         viewPager = binding.packageViewpager;

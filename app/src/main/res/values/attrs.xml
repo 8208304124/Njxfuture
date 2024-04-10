@@ -1,0 +1,3 @@
+<resources>
+    <attr name="bottomTabs" format="reference|color" />
+</resources>

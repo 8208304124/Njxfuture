@@ -3,14 +3,19 @@ package com.example.njxfuture;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,13 +50,20 @@ public class Register extends AppCompatActivity {
     boolean otpCheck = false;
     private static final String MOBILE_NUMBER_REGEX = "^[6-9]\\d{9}$";
     int count = 1;
+    LinearLayout l1;
     // Pattern object for compiling the regular expression
     private static final Pattern pattern = Pattern.compile(MOBILE_NUMBER_REGEX);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        // Set the default night mode for the app
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            setTheme(R.style.NoActionBarDark);
+        } else {
+            setTheme(R.style.NoActionBar);
+        }
         setContentView(R.layout.activity_register);
         email = findViewById(R.id.register_edit_email);
         uname = findViewById(R.id.register_user_name);
@@ -264,6 +276,7 @@ public class Register extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Please fill all the details!!", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     public static boolean isValidPassword(String password) {
@@ -353,5 +366,15 @@ public class Register extends AppCompatActivity {
         }
         return deviceId;
     }
-
+//    @Override
+//    public void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
+//        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+//        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+//            resid = R.style.Theme_NoActionBarWithLight; // Change to your light theme
+//
+//        } else {
+//            resid = R.style.Theme_NoActionBarWithDark; // Change to your dark theme
+//        }
+//        super.onApplyThemeResource(theme, resid, first);
+//    }
 }

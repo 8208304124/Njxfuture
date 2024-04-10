@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
@@ -44,6 +46,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        // Set the default night mode for the app
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            setTheme(R.style.NoActionBarDark);
+        } else {
+            setTheme(R.style.NoActionBar);
+        }
         setContentView(R.layout.activity_login);
         login = findViewById(R.id.login_btn);
         uname = findViewById(R.id.user_id);
@@ -51,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         register = findViewById(R.id.register_layout);
         forgotPass = findViewById(R.id.forgot_pass);
         help = findViewById(R.id.help);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
@@ -82,7 +90,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void CallLogin(String name, String passs) {
-
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
         Call<UpdateUserDataModel> call = APIRequests.getUserLogin(getDeviceIds(getApplicationContext()), name, passs);
         call.enqueue(new Callback<UpdateUserDataModel>() {
             @Override
