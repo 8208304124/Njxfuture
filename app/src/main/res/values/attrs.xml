@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="bottomTabs" format="reference|color" />
+    <declare-styleable name="CustomThemeAttributes">
+        <attr name="bottomTabs" format="reference|color"/>
+        <!-- Add more custom attributes here if needed -->
+    </declare-styleable>
 </resources>

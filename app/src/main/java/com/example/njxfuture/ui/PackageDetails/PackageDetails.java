@@ -53,7 +53,7 @@ public class PackageDetails extends Fragment {
         if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
             tabLayout.setBackgroundColor(getResources().getColor(R.color.tabsDark));
         } else {
-           tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
+           tabLayout.setBackgroundColor(getResources().getColor(R.color.soft_grey));
         }
         tabLayout.setTabTextColors(ContextCompat.getColorStateList(getContext(), R.color.tab_color_selector));
         FragmentManager fragmentManager = getFragmentManager();

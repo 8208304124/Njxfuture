@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -41,7 +42,7 @@ import java.util.List;
 
 public class more extends Fragment {
 
-    LinearLayout editProfile, subscription, whatsup, linkedin, instagram, twitter, writeEmail, helps, facebok;
+    LinearLayout editProfile, subscription, whatsup, linkedin, instagram, twitter, writeEmail, helps, facebok,tickets,rewards;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,12 +53,41 @@ public class more extends Fragment {
         editProfile = binding.editProfile;
         subscription = binding.subscription;
         whatsup = binding.whatsUp;
+        tickets = binding.tickets;
+        rewards = binding.rewards;
         linkedin = binding.lindin;
         instagram = binding.instagram;
         twitter = binding.twitter;
         writeEmail = binding.emails;
         helps = binding.helps;
         facebok = binding.facebook;
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        // Set the default night mode for the app
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+           editProfile.setBackgroundColor(getResources().getColor(R.color.light_dark));
+            subscription.setBackgroundColor(getResources().getColor(R.color.light_dark));
+            whatsup.setBackgroundColor(getResources().getColor(R.color.light_dark));
+            linkedin.setBackgroundColor(getResources().getColor(R.color.light_dark));
+            instagram.setBackgroundColor(getResources().getColor(R.color.light_dark));
+            twitter.setBackgroundColor(getResources().getColor(R.color.light_dark));
+            writeEmail.setBackgroundColor(getResources().getColor(R.color.light_dark));
+            helps.setBackgroundColor(getResources().getColor(R.color.light_dark));
+            facebok.setBackgroundColor(getResources().getColor(R.color.light_dark));
+            tickets.setBackgroundColor(getResources().getColor(R.color.light_dark));
+            rewards.setBackgroundColor(getResources().getColor(R.color.light_dark));
+        } else {
+            editProfile.setBackgroundColor(getResources().getColor(R.color.soft_grey));
+            subscription.setBackgroundColor(getResources().getColor(R.color.soft_grey));
+            whatsup.setBackgroundColor(getResources().getColor(R.color.soft_grey));
+            linkedin.setBackgroundColor(getResources().getColor(R.color.soft_grey));
+            instagram.setBackgroundColor(getResources().getColor(R.color.soft_grey));
+            twitter.setBackgroundColor(getResources().getColor(R.color.soft_grey));
+            writeEmail.setBackgroundColor(getResources().getColor(R.color.soft_grey));
+            helps.setBackgroundColor(getResources().getColor(R.color.soft_grey));
+            facebok.setBackgroundColor(getResources().getColor(R.color.soft_grey));
+            tickets.setBackgroundColor(getResources().getColor(R.color.soft_grey));
+            rewards.setBackgroundColor(getResources().getColor(R.color.soft_grey));
+        }
         editProfile.setOnClickListener(View -> {
             CallEditProfile();
         });

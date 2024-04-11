@@ -2,15 +2,19 @@ package com.example.njxfuture;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
+
+import java.util.Objects;
 import java.util.regex.Pattern;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,11 +28,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.njxfuture.API.APIRequests;
+import com.example.njxfuture.API.DataModels.OtpGenerateDataModel;
 import com.example.njxfuture.API.DataModels.UpdateUserDataModel;
 import com.example.njxfuture.API.DataModels.User;
 import com.example.njxfuture.databinding.FragmentEditProfileBinding;
@@ -44,11 +51,15 @@ public class EditProfile extends Fragment implements View.OnTouchListener {
 
     private FragmentEditProfileBinding binding;
     String umail, uname, ugst, upwd, uno;
-    TextView email, name, gst, pwd, no;
-    Button update;
+    TextView email, name, gst, pwd, no, number_text,verify_text;
+    ImageView verify_mark;
+    Button update,verify;
+    EditText otp;
     private Drawable eyeIcon;
     private boolean isPasswordVisible = false;
     private ProgressBar progressBar;
+    int count = 1;
+    boolean otpCheck = false;
     private static final String MOBILE_NUMBER_REGEX = "^[6-9]\\d{9}$";
     private static final Pattern pattern = Pattern.compile(MOBILE_NUMBER_REGEX);
     @Override
@@ -56,6 +67,18 @@ public class EditProfile extends Fragment implements View.OnTouchListener {
                              Bundle savedInstanceState) {
         binding = FragmentEditProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        update = binding.updateBtn;
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        // Set the default night mode for the app
+        ContextThemeWrapper contextThemeWrapper;
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.EditProfileDark);
+        } else {
+            contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.EditProfile);
+        }
+        LayoutInflater themedInflater = inflater.cloneInContext(contextThemeWrapper);
+        View themedView = themedInflater.inflate(R.layout.fragment_edit_profile, container, false);
+
         progressBar = root.findViewById(R.id.progressBar);
         showLoader();
         email = root.findViewById(R.id.user_email);
@@ -63,13 +86,18 @@ public class EditProfile extends Fragment implements View.OnTouchListener {
         gst = root.findViewById(R.id.edit_gst);
         pwd = root.findViewById(R.id.change_pwd);
         no = root.findViewById(R.id.edit_mobile_no);
+        otp = binding.efitOtp;
         umail=email.getText().toString();
         uname=name.getText().toString();
         ugst=gst.getText().toString();
+        number_text =binding.numberText;
+        verify = binding.verifyButtonViaSms;
+        verify_text = binding.verifyText;
+        verify_mark = binding.verifyMark;
         upwd=pwd.getText().toString();
         uno=no.getText().toString();
         setHasOptionsMenu(true);
-        eyeIcon = ContextCompat.getDrawable(getContext(), R.drawable.eye_outline_svgrepo_com);
+        eyeIcon = ContextCompat.getDrawable(requireContext(), R.drawable.eye_outline_svgrepo_com);
         eyeIcon.setBounds(0, 0, eyeIcon.getIntrinsicWidth(), eyeIcon.getIntrinsicHeight());
         // Set touch listener to detect eye icon click
         pwd.setOnTouchListener(this);
@@ -95,6 +123,74 @@ public class EditProfile extends Fragment implements View.OnTouchListener {
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Log.e("API_CALL", "API call failed: " + t.getMessage());
             }
+        });
+        verify.setOnClickListener(v -> {
+            if (count == 1) {
+                if (isValidMobileNumber(no.getText().toString())) {
+
+                    Call<OtpGenerateDataModel> call1 = APIRequests.generateOtp(getDeviceIds(getContext()), no.getText().toString());
+                    call1.enqueue(new Callback<OtpGenerateDataModel>() {
+                        @Override
+                        public void onResponse(@NonNull Call<OtpGenerateDataModel> call1, @NonNull Response<OtpGenerateDataModel> response) {
+                            if (response.isSuccessful()) {
+                                assert response.body() != null;
+                                if (response.body().getActy()) {
+                                    verify.setText(R.string.verify);
+                                    no.setVisibility(View.GONE);
+                                    number_text.setVisibility(View.GONE);
+                                    otp.setVisibility(View.VISIBLE);
+                                } else {
+                                    Toast.makeText(getContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<OtpGenerateDataModel> call, @NonNull Throwable t) {
+                            Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                } else {
+                    Toast.makeText(getContext(), "Mobile Number is incorrect!!", Toast.LENGTH_SHORT).show();
+                }
+            } else if (count > 2) {
+                if (isValidMobileNumber(no.getText().toString())) {
+                    Call<UpdateUserDataModel> call1 = APIRequests.getOtpVerify(getDeviceIds(getContext()), otp.getText().toString(), no.getText().toString());
+                    call1.enqueue(new Callback<UpdateUserDataModel>() {
+                        @Override
+                        public void onResponse(@NonNull Call<UpdateUserDataModel> call, @NonNull Response<UpdateUserDataModel> response) {
+                            if (response.isSuccessful()) {
+                                assert response.body() != null;
+                                if (Objects.equals(response.body().getMsg(), "OTP Matched") && !Objects.equals(response.body().getUser(), "UNKNOWN")) {
+                                    verify.setVisibility(View.GONE);
+                                    no.setVisibility(View.VISIBLE);
+                                    number_text.setVisibility(View.VISIBLE);
+                                    otp.setVisibility(View.GONE);
+                                    verify_text.setVisibility(View.VISIBLE);
+                                    verify_mark.setVisibility(View.VISIBLE);
+                                    no.setFocusable(false);
+                                    otpCheck = true;
+                                    no.setClickable(false);
+                                    no.setEnabled(false);
+                                } else {
+                                    Toast.makeText(getContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<UpdateUserDataModel> call, @NonNull Throwable t) {
+                            Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                } else {
+                    Toast.makeText(getContext(), "Mobile Number is incorrect!!", Toast.LENGTH_SHORT).show();
+                }
+                count = 2;
+            }
+            count = count + 1;
         });
         email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -210,7 +306,8 @@ public class EditProfile extends Fragment implements View.OnTouchListener {
             }
         });
         setCustomActionBar();
-        return root;
+
+        return themedView;
     }
                 public static boolean isValidPassword(String password) {
                     // Define your password validation rules here

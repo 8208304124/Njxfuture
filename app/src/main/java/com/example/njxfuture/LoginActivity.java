@@ -90,8 +90,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void CallLogin(String name, String passs) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
         Call<UpdateUserDataModel> call = APIRequests.getUserLogin(getDeviceIds(getApplicationContext()), name, passs);
         call.enqueue(new Callback<UpdateUserDataModel>() {
             @Override

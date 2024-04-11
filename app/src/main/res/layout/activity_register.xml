@@ -133,7 +133,7 @@
                         android:id="@+id/number_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="?android:attr/colorPrimary"
+                        android:background="@color/second_light_dark"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="3dp"
                         android:text="@string/_91"
@@ -175,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:backgroundTint="?android:attr/colorPrimary"
+                    android:backgroundTint="@color/second_light_dark"
                     android:text="@string/verify_via_sms"
                     android:textColor="@color/purple_500"
                     android:textSize="12sp" />
@@ -244,7 +244,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="?android:attr/colorPrimary"
+                android:backgroundTint="@color/second_light_dark"
                 android:text="@string/register"
                 android:textColor="@color/purple_500"
                 android:textSize="12sp" />

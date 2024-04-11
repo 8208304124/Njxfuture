@@ -6,204 +6,249 @@
     tools:context=".EditProfile">
 
     <ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp"
-        tools:ignore="UselessParent">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_profile_rounded_corners"
             android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/email"
-                android:textColor="@color/light_blue" />
-
-            <EditText
-                android:id="@+id/user_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="User Name"
-                android:background="@android:color/transparent"
-                android:hint="@string/enter_mail"
-                android:textColorHint="@color/purple_500"
-                android:textColor="@color/purple_500"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:inputType="textEmailAddress" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_profile_rounded_corners"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/full_name"
-                android:textColor="@color/light_blue" />
-
-            <EditText
-                android:id="@+id/edit_user_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="User Name"
-                android:background="@android:color/transparent"
-                android:hint="@string/user"
-                android:textColorHint="@color/purple_500"
-                android:textColor="@color/purple_500"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:inputType="text" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_profile_rounded_corners"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/mobile_no"
-                android:textColor="@color/light_blue" />
+            android:padding="20dp"
+            tools:ignore="UselessParent">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                android:background="@drawable/edit_profile_rounded_corners"
+                android:orientation="vertical"
+                android:padding="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/email"
+                    android:textColor="@color/light_blue" />
+
+                <EditText
+                    android:id="@+id/user_email"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/round_corner_light_blue"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="3dp"
-                    android:text="+91"
+                    android:autofillHints="User Name"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/enter_mail"
+                    android:inputType="textEmailAddress"
                     android:textColor="@color/purple_500"
+                    android:textColorHint="@color/purple_500"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_profile_rounded_corners"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/full_name"
+                    android:textColor="@color/light_blue" />
+
                 <EditText
-                    android:id="@+id/edit_mobile_no"
+                    android:id="@+id/edit_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:hint="@string/enter_mobile_no"
-                    android:textColorHint="@color/purple_500"
                     android:autofillHints="User Name"
                     android:background="@android:color/transparent"
-                    android:text="7774071053"
+                    android:hint="@string/user"
+                    android:inputType="text"
                     android:textColor="@color/purple_500"
+                    android:textColorHint="@color/purple_500"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:inputType="number" />
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_profile_rounded_corners"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/mobile_no"
+                        android:textColor="@color/light_blue" />
+
+                    <ImageView
+                        android:id="@+id/verify_mark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/verified"
+                        android:src="@drawable/baseline_verified_24"
+                        android:visibility="invisible" />
+                    <TextView
+                        android:id="@+id/verify_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/verified"
+                        android:textColor="@color/verify_color"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/numberText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_corner_light_blue"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="3dp"
+                        android:text="+91"
+                        android:textColor="@color/purple_500"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edit_mobile_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:autofillHints="User Name"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/enter_mobile_no"
+                        android:inputType="number"
+                        android:textColor="@color/purple_500"
+                        android:textColorHint="@color/purple_500"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/efit_otp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:autofillHints="OTP"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/enter_otp"
+                        android:inputType="number"
+                        android:textColor="@color/purple_500"
+                        android:textColorHint="@color/purple_500"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/verify_button_via_sms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="@color/second_light_blue"
+                    android:text="@string/verify_via_sms"
+                    android:textColor="@color/purple_500"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_profile_rounded_corners"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/gst_no"
+                    android:textColor="@color/light_blue" />
+
+                <EditText
+                    android:id="@+id/edit_gst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="Enter GST no."
+                    android:background="@android:color/transparent"
+                    android:hint="@string/enter_gst_no"
+                    android:inputType="text"
+                    android:textColor="@color/purple_500"
+                    android:textColorHint="@color/purple_500"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_profile_rounded_corners"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/change_password"
+                    android:textColor="@color/light_blue" />
+
+                <EditText
+                    android:id="@+id/change_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="Enter Password"
+                    android:background="@android:color/transparent"
+                    android:drawableEnd="@drawable/eye_outline_svgrepo_com"
+                    android:drawablePadding="8dp"
+                    android:hint="@string/enter_password"
+                    android:inputType="textPassword"
+                    android:text="asdasdd"
+                    android:textColor="@color/purple_500"
+                    android:textColorHint="@color/purple_500"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
             <Button
-                android:layout_width="wrap_content"
+                android:id="@+id/update_btn"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:backgroundTint="@color/second_light_blue"
-                android:text="@string/verify_via_sms"
+                android:padding="15sp"
+                android:text="@string/update_profile"
                 android:textColor="@color/purple_500"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_profile_rounded_corners"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/gst_no"
-                android:textColor="@color/light_blue" />
-
-            <EditText
-                android:id="@+id/edit_gst"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="Enter GST no."
-                android:hint="@string/enter_gst_no"
-                android:textColorHint="@color/purple_500"
-                android:background="@android:color/transparent"
-                android:textColor="@color/purple_500"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:inputType="text" />
+                android:textSize="14sp" />
 
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_profile_rounded_corners"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/change_password"
-                android:textColor="@color/light_blue" />
-
-            <EditText
-                android:id="@+id/change_pwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="Enter Password"
-                android:background="@android:color/transparent"
-                android:textColor="@color/purple_500"
-                android:hint="@string/enter_password"
-                android:textSize="16sp"
-                android:text="asdasdd"
-                android:drawableEnd="@drawable/eye_outline_svgrepo_com"
-                android:drawablePadding="8dp"
-                android:inputType="textPassword"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-        <Button
-            android:id="@+id/update_btn"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15sp"
-            android:backgroundTint="@color/second_light_blue"
-            android:text="@string/update_profile"
-            android:textColor="@color/purple_500"
-            android:textSize="14sp" />
-
-    </LinearLayout>
-</ScrollView>
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        />
+        android:layout_gravity="center" />
 </FrameLayout>

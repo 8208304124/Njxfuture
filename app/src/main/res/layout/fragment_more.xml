@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark"
     tools:context=".ui.more.more">
 
     <ScrollView
@@ -35,7 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:background="@color/light_dark"
+                    
                     android:orientation="horizontal"
                     android:paddingVertical="3dp">
 
@@ -59,7 +58,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/user"
-                            android:textColor="@color/white"
+                            
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -108,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@color/light_dark"
+                
                 android:orientation="horizontal"
                 android:paddingVertical="10dp">
 
@@ -128,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/buy_subscriptions"
-                    android:textColor="@color/white"
+                    
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -151,7 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:background="@color/light_dark"
+                
                 android:orientation="horizontal"
                 android:paddingVertical="10dp">
 
@@ -169,7 +168,7 @@
                     android:layout_gravity=""
                     android:layout_marginStart="8dp"
                     android:text="@string/my_tickets"
-                    android:textColor="@color/white"
+                    
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -192,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:background="@color/light_dark"
+                
                 android:orientation="horizontal"
                 android:paddingVertical="10dp">
 
@@ -210,7 +209,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/rewards_transaction_history"
-                    android:textColor="@color/white"
+                    
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -234,7 +233,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:background="@color/light_dark"
+                
                 android:orientation="horizontal"
                 android:paddingVertical="3dp">
 
@@ -256,7 +255,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/help"
-                        android:textColor="@color/white"
+                        
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -293,7 +292,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@color/light_dark"
+                
                 android:orientation="horizontal"
                 android:paddingVertical="10dp">
 
@@ -312,7 +311,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
                     android:text="@string/write_email_to_us"
-                    android:textColor="@color/white"
+                    
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -336,7 +335,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:background="@color/light_dark"
+                
                 android:orientation="horizontal"
                 android:paddingVertical="10dp">
 
@@ -354,7 +353,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
                     android:text="@string/whatsapp"
-                    android:textColor="@color/white"
+                    
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -384,7 +383,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@color/light_dark"
+                
                 android:orientation="horizontal"
                 android:paddingVertical="10dp">
 
@@ -402,7 +401,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
                     android:text="@string/linkdin"
-                    android:textColor="@color/white"
+                    
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -426,7 +425,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:background="@color/light_dark"
+                
                 android:orientation="horizontal"
                 android:paddingVertical="10dp">
 
@@ -444,7 +443,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
                     android:text="@string/twitter"
-                    android:textColor="@color/white"
+                    
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -468,7 +467,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:background="@color/light_dark"
+                
                 android:orientation="horizontal"
                 android:paddingVertical="10dp">
 
@@ -486,7 +485,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
                     android:text="@string/instagram"
-                    android:textColor="@color/white"
+                    
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -510,7 +509,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:background="@color/light_dark"
+                
                 android:orientation="horizontal"
                 android:paddingVertical="10dp">
 
@@ -528,7 +527,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
                     android:text="@string/facebook"
-                    android:textColor="@color/white"
+                    
                     android:textSize="14sp"
                     android:textStyle="bold" />
 

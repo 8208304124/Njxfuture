@@ -2,6 +2,7 @@ package com.example.njxfuture.ViewPager.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,8 +57,15 @@ public class NotificationCommonAdapter extends ArrayAdapter<Item> {
             textView1.setText(item.getDescription());
             Picasso.get().load(imageUrl).into(image);
         }
-        int backgroundColor = (position % 2 == 0) ? R.color.dark : R.color.light_dark;
-        view.setBackgroundResource(backgroundColor);
+        int nightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        // Set the default night mode for the app
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            int backgroundColor = (position % 2 == 0) ? R.color.dark : R.color.light_dark;
+            view.setBackgroundResource(backgroundColor);
+        } else {
+            int backgroundColor = (position % 2 == 0) ? R.color.soft_grey : R.color.white;
+            view.setBackgroundResource(backgroundColor);
+        }
         // Set onClick listener for the item
         view.setOnClickListener(new View.OnClickListener() {
             @Override

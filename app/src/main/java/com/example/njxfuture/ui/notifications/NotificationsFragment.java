@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -51,7 +52,13 @@ public class NotificationsFragment extends Fragment {
         View root = binding.getRoot();
         tabLayout = binding.tabs;
         tabLayout.setTabTextColors(ContextCompat.getColorStateList(getContext(), R.color.tab_color_selector));
-
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        // Set the default night mode for the app
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.tabsDark));
+        } else {
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.soft_grey));
+        }
         FragmentManager fragmentManager = getFragmentManager();
         viewPager = binding.notificationViewpager;
         assert fragmentManager != null;
