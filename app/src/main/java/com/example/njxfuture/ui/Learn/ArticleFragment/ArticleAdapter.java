@@ -57,9 +57,9 @@ public class ArticleAdapter extends ArrayAdapter<ArticleDataModel> {
             textView1.setText(item.getArt());
             Picasso.get().load(imageUrl).into(image);
         }
-        int backgroundColor = (position % 2 == 0) ? R.color.dark : R.color.light_dark;
-        view.setBackgroundResource(backgroundColor);
-        // Set onClick listener for the item
+//        int backgroundColor = (position % 2 == 0) ? R.color.dark : R.color.light_dark;
+//        view.setBackgroundResource(backgroundColor);
+//        // Set onClick listener for the item
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

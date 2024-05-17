@@ -36,11 +36,13 @@ public class PackageImageDetails extends Fragment {
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             ImageView packImage = binding.packImage;
+            packImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
             if(img!=null)
             {
                 String imageUrl = "http://njx.revacg.in/" + img;
                 hideLoader();
                 Picasso.get().load(imageUrl).into(packImage);
+
             }
         }, 2000);
 
